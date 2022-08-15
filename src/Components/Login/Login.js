@@ -1,18 +1,27 @@
+import { useFormik } from "formik";
 import React from "react";
 import "./Login.css"
 
 function Login(){
-    console.log('a');
+    const formik = useFormik({
+        initialValues:{
+            username: '',
+            password: ''
+        },
+        onSubmit: values=>{
+            console.log(values);
+        }
+    })
     return (
         <div className="login">
             <div className="login-left">PROPLA</div>
             <div className="login-right">
                 <div className="box">
                     <div className="box-inner">
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <h2>Sign In</h2>
-                            <input placeholder="username*"/>
-                            <input placeholder="password*" />
+                            <input placeholder="username*" id="username" type="text" value={formik.values.username} onChange={formik.handleChange}/>
+                            <input placeholder="password*" id="password" type="password" value={formik.values.password} onChange={formik.handleChange} />
                             <button type="submit">Login</button>
                         </form>
                     </div>
