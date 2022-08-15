@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.head{
+    display: flex;
+    height: 80px;
+    align-items: center;
+    padding: 0 50px;
+    justify-content: space-between;
+    border-bottom: 1px solid #caccd1;
+    background-color: #f6f6f5;
+}
+.head .links{
+    display: flex;
+    gap: 20px;
+}
+.head a{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    color: #0079c1;
+    font-family: 'Montserrat', sans-serif;
+}
+.head a:last-child{
+    color: red;
+}

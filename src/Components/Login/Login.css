@@ -1,0 +1,119 @@
+.login {
+    display: flex;
+}
+
+.login-left {
+    height: 100vh;
+    width: 40%;
+    background-color: #003666;
+}
+
+.login-right {
+    width: 60%;
+    background-color: #dbebfa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-right .box {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.836);
+    overflow: hidden;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-image: conic-gradient(transparent, transparent, rgb(0, 190, 248));
+    animation: animate 1s linear infinite;
+}
+
+.box::after {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background-image: conic-gradient(transparent, transparent,  rgb(216, 10, 216));
+    animation: animate 1s linear infinite;
+    animation-delay: -0.5s;
+}
+
+
+.box div {
+    position: absolute;
+    inset: 3px;
+    border-radius: 16px;
+    background-color: white;
+    z-index: 1;
+}
+
+.box .box-inner{
+    padding: 70px 20px 0;
+}
+
+.box .box-inner form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.box-inner form h2{
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.box-inner input{
+    height: 40px;
+    font-size: 18px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border: 1px solid;
+    letter-spacing: 1px;
+}
+.box-inner input:focus{
+    outline: #b3dcff solid 3px;
+    border: 1px solid #007fbd;
+}
+.box-inner button{
+    width: 30%;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #168eea;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+.box-inner button:hover{
+    background-color: #075aaa;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        background-image: conic-gradient(transparent, transparent, rgb(5, 255, 80));
+    }
+    40% {
+        background-image: conic-gradient(transparent, transparent, rgb(255, 230, 1));
+    }
+    60% {
+        background-image: conic-gradient(transparent, transparent, rgb(255, 1, 43));
+    }
+    80% {
+        background-image: conic-gradient(transparent, transparent, rgb(1, 18, 255));
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
