@@ -1,7 +1,10 @@
 import React, {useState} from 'react'
 import Header from '../Headder/Header'
 import GeneralInfo from '../TabsComponent/GeneralInfo/GeneralInfo'
+import GitRepoLink from '../TabsComponent/GitRepoLinks/GitRepoLink'
+import ProjectUser from '../TabsComponent/ProjectUsers/ProjectUser'
 import ServerLink from '../TabsComponent/ServerLinks/ServerLink'
+import TechStack from '../TabsComponent/TechStack/TechStack'
 
 import './Details.css'
 
@@ -28,6 +31,9 @@ function Details(){
                 <div className="content">
                     {tabId==="info" && <GeneralInfo/>}
                     {tabId==="serverlink" && <ServerLink/>}
+                    {tabId==="gitlink" && <GitRepoLink/>}
+                    {tabId==="prusers" && <ProjectUser/>}
+                    {tabId==="tchstack" && <TechStack/>}
                 </div>
             </div>
         </>

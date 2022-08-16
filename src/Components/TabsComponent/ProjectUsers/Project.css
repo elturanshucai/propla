@@ -1,0 +1,24 @@
+.projectuser{
+    list-style: none;
+}
+
+.projectuser li{
+    display: flex;
+}
+.projectuser li:first-child{
+    background-color: #3197d6;
+}
+.projectuser li div{
+    border-right: 2px solid gainsboro;
+    padding: 15px 0;
+    text-align: center;
+    width: 10%;
+    font-weight: 600;
+    color: white;
+}
+.projectuser #mail, #positionName{
+    width: 20%;
+}
+.projectuser li div:last-child{
+    border: none;
+}

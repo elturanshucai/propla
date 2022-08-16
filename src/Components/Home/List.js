@@ -54,7 +54,7 @@ function List() {
     }
 
     const handleClick = (e) => {
-        navigate(`/all-info/${e.target.id}`)
+        navigate(`/project/${e.target.id}`)
     }
 
     return (

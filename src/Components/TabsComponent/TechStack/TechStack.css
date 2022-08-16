@@ -1,0 +1,14 @@
+.tech{
+    list-style: none;
+}
+.tech li:first-child{
+    background-color: #3197d6;
+    color: white;
+    font-weight: 600;
+}
+.tech li{
+    padding: 15px 10px;
+}
+li::selection{
+    background: red;
+}
