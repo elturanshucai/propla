@@ -1,0 +1,50 @@
+.details{
+    margin: 0 auto;
+    padding: 40px 0;
+}
+.details h1::selection,button::selection,div::selection{
+    color: white;
+    background: red;
+}
+.details h1{
+    width: fit-content;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    color: #0b648f;
+}
+.details .tabs{
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid #c9c9c9;
+}
+.details .tabs button{
+    padding:10px 25px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    background-color: #e6e6e6;
+}
+.details .tabs button:hover{
+    background-color: #d4d7da;
+}
+.details .tabs button:first-child{
+    border-radius: 5px 0 0 0;
+}
+.details .tabs button:last-child{
+    border-radius: 0 5px 0 0;
+}
+.details .tabs button.active{
+    background-color: white;
+    padding: 10px 35px;
+    font-weight: 600;
+    color: #0b648f;
+    border-bottom: 2px solid #0b648f;
+}
+
+.details .content{
+    width: 80%;
+    margin: 30px auto;
+    background-color: #f0f0f0;
+}

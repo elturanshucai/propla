@@ -1,12 +1,17 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import "./Header.css"
+import img from '../../logo_transparent.png'
 function Header(){
+    const navigate=useNavigate()
+    const handleClick=()=>{
+        navigate('/list')
+    }
     return  (
         <div className="head">
-            <img src="../../logo_transparent.png" />
+            <img src={img} onClick={handleClick} />
             <div className="links">
-                <Link to="/">Home</Link>
+                <Link to="/list">Home</Link>
                 <Link to="/login">Log Out</Link>
             </div>
         </div>

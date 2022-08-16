@@ -1,12 +1,16 @@
+.main{
+    padding: 50px 0;
+}
 .search{
     display: flex;
     gap: 0;
     justify-content: baseline;
     align-items: center;
     width: 20%;
-    margin: 40px auto;
-    
+    margin: 0 auto;
+    margin-bottom: 50px;
     border-radius: 5px;
+    box-shadow: #388ed1 4px 3px 20px 1px;
 }
 .search input{
     height: 40px;
@@ -17,6 +21,7 @@
     letter-spacing: 1px;
     outline: none;
     border: 1px solid #b9cfed;
+    color: #00387b;
 }
 .search input::placeholder{
     font-size: 14px;
@@ -41,21 +46,61 @@
     font-weight: 700;
     color: white;
     flex-wrap: wrap;
-    width: 80%;
+    width: 60%;
     margin: 20px auto;
-    justify-content: center;
+    justify-content: start;
 }
 
 .list .item{
-    width: 40%;
-    height: 200px;
+    width: 30%;
+    height: 250px;
     border-radius: 5px;
+    position: relative;
+    background-color: #01295c;
+    overflow: hidden;
+}
+.list .item:hover{
+    box-shadow: #01295c 5px 5px 20px 5px;
+}
+.list .item .iteminner{
     display: flex;
-    background-color: #5482ab;
     cursor: pointer;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    inset: 3px;
+    border-radius: 5px;
+    background-color: #01295c;
+    z-index: 1;
 }
+
+.item:hover::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 500px;
+    background-image: conic-gradient(transparent, rgb(0, 247, 255));
+    animation: animate2 2s linear infinite;
+}
+.item:hover::after {
+    content: '';
+    position: absolute;
+    width: 120%;
+    height: 500px;
+    background-image: conic-gradient(transparent,  rgb(255, 168, 5));
+    animation: animate2 2s linear infinite;
+    animation-delay: -1s;
+}
+
+@keyframes animate2 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .list .item svg{
     margin-left: 5px;
 }

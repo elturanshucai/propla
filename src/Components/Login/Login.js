@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
+import logo from '../../logo_transparent.png'
 import "./Login.css"
 
 function Login(){
@@ -14,7 +15,7 @@ function Login(){
     })
     return (
         <div className="login">
-            <div className="login-left">PROPLA</div>
+            <div className="login-left"><img src={logo} /></div>
             <div className="login-right">
                 <div className="box">
                     <div className="box-inner">

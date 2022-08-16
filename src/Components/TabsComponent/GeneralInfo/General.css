@@ -1,0 +1,21 @@
+.general-info ul{
+    list-style: none;
+}
+.general-info li{
+    display: flex;
+}
+.general-info li:nth-child(2n-1){
+    background-color: white;
+}
+.general-info li div{
+    padding: 20px 30px;
+    width: 70%;
+    border: 1px solid gainsboro;
+}
+.general-info li div:first-child{
+    font-weight: 600;
+    color: whitesmoke;
+    background-color: #3197d6;
+    width: 30%;
+    text-align: center;
+}

@@ -5,7 +5,13 @@
 .login-left {
     height: 100vh;
     width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #003666;
+}
+.login-left img{
+    width: 400px;
 }
 
 .login-right {

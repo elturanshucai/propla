@@ -5,12 +5,12 @@
 }
 .head{
     display: flex;
-    height: 80px;
+    height: 110px;
     align-items: center;
     padding: 0 50px;
     justify-content: space-between;
     border-bottom: 1px solid #caccd1;
-    background-color: #f6f6f5;
+    background-color: #0169a4;
 }
 .head .links{
     display: flex;
@@ -18,11 +18,22 @@
 }
 .head a{
     text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
-    color: #0079c1;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
     font-family: 'Montserrat', sans-serif;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 .head a:last-child{
-    color: red;
+    background-color: red;
+}
+.head a:last-child:hover{
+    background-color: #bb1e10;
+}
+.head img{
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
 }
