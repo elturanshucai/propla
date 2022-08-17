@@ -2,10 +2,7 @@
     margin: 0 auto;
     padding: 40px 0;
 }
-.details h1::selection,button::selection,div::selection{
-    color: white;
-    background: red;
-}
+
 .details h1{
     width: fit-content;
     margin: 0 auto;

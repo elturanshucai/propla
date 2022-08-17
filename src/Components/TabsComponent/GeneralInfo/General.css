@@ -1,21 +1,30 @@
-.general-info ul{
-    list-style: none;
-}
-.general-info li{
+.general-info{
+    width: 100%;
     display: flex;
+    font-size: 18px;
 }
-.general-info li:nth-child(2n-1){
-    background-color: white;
-}
-.general-info li div{
-    padding: 20px 30px;
-    width: 70%;
-    border: 1px solid gainsboro;
-}
-.general-info li div:first-child{
-    font-weight: 600;
-    color: whitesmoke;
-    background-color: #3197d6;
+.general-info thead{
     width: 30%;
+}
+.general-info thead tr{
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    font-weight: 500;
+    background-color: #203143;
+    color: antiquewhite;
+}
+.general-info thead td{
     text-align: center;
+}
+.general-info tbody{
+    background-color: #f2f7f9;
+    width: 70%;
+}
+.general-info tbody tr{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 25px 50px;
 }

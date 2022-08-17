@@ -59,8 +59,12 @@
     background-color: #01295c;
     overflow: hidden;
 }
-.list .item:hover{
-    box-shadow: #01295c 5px 5px 20px 5px;
+    
+.item .iteminner svg{
+    display: none;
+}
+.item .iteminner:hover svg{
+    display: block;
 }
 .list .item .iteminner{
     display: flex;
@@ -72,8 +76,13 @@
     border-radius: 5px;
     background-color: #01295c;
     z-index: 1;
+    font-size: 18px;
 }
-
+.iteminner:hover {
+    -moz-box-shadow:    inset 0 0 40px #000000;
+    -webkit-box-shadow: inset 0 0 40px #000000;
+    box-shadow:         inset 0 0 40px #000000;
+ }
 .item:hover::before {
     content: "";
     position: absolute;

@@ -2,16 +2,41 @@ import { useFormik } from "formik";
 import React from "react";
 import logo from '../../logo_transparent.png'
 import "./Login.css"
+import {user} from '../../data'
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
+const validate=values=>{
+    let errors={}
+
+    if(!values.username){
+        errors.username='Required'
+    }
+    else if(values.username!==user.username){
+        errors.username='Wrong Username'
+    }
+
+    if(!values.password){
+        errors.password='Required'
+    }
+    else if(values.password!==user.password){
+        errors.password='Wrong Password'
+    }
+    return errors
+}
 
 function Login(){
+    const navigate=useNavigate()
     const formik = useFormik({
         initialValues:{
             username: '',
             password: ''
         },
         onSubmit: values=>{
-            console.log(values);
-        }
+            axios.post('login2', values).then(res => localStorage.setItem('token', res.data))
+
+            navigate('/list')
+        },
+        validate,
     })
     return (
         <div className="login">

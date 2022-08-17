@@ -1,14 +1,15 @@
 .tech{
-    list-style: none;
+    width: 100%;
+    font-size: 16px;
 }
-.tech li:first-child{
-    background-color: #3197d6;
-    color: white;
-    font-weight: 600;
+.tech thead tr{
+    background-color: #203143;
+    color: antiquewhite;
 }
-.tech li{
-    padding: 15px 10px;
+.tech tbody{
+    background-color: #f2f7f9;
 }
-li::selection{
-    background: red;
+.tech td{
+    padding: 20px 60px;
 }
+

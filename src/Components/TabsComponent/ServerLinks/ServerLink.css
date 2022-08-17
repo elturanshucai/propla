@@ -1,20 +1,22 @@
-.serverlink{
-    list-style: none;
+.table-3{
+    font-size: 18px;
+    width: 100%;
 }
-.serverlink li{
-    display: flex;
+.table-3 thead{
+    background-color: #203143;
+    color: antiquewhite;
 }
-.serverlink li:first-child{
-    background-color: #3197d6;
-}
-.serverlink li div{
-    text-align: center;
+.table-3 thead td{
     width: 33%;
-    padding: 15px 0;
-    font-weight: 600;
-    color: white;
-    border-right: 2px solid gainsboro;
+    text-align: center;
+    padding: 25px 0;
+    font-weight: 500;
 }
-.serverlink li div:last-child{
-    border: none;
+.table-3 tbody{
+    background-color: #f2f7f9;
+}
+
+.table-3 tbody td{
+    padding: 25px 0;
+    text-align: center;
 }

@@ -1,24 +1,24 @@
-.projectuser{
-    list-style: none;
+.projectusers{
+    width: 100%;
+    font-size: 16px;
 }
-
-.projectuser li{
-    display: flex;
+.projectusers thead{
+    background-color: #203143;
+    color: antiquewhite;
 }
-.projectuser li:first-child{
-    background-color: #3197d6;
-}
-.projectuser li div{
-    border-right: 2px solid gainsboro;
-    padding: 15px 0;
+.projectusers thead td{
+    width: 12%;
+    padding: 20px 0;
     text-align: center;
-    width: 10%;
-    font-weight: 600;
-    color: white;
+    font-weight: 500;
 }
-.projectuser #mail, #positionName{
-    width: 20%;
+.projectusers thead #mail{
+    width: 14%;
 }
-.projectuser li div:last-child{
-    border: none;
+.projectusers tbody{
+    background-color: #f2f7f9;
+}
+.projectusers tbody td{
+    text-align: center;
+    padding: 20px 0;
 }
