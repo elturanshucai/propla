@@ -33,7 +33,6 @@ function Login(){
         },
         onSubmit: values=>{
             axios.post('login2', values).then(res => localStorage.setItem('token', res.data))
-
             navigate('/list')
         },
         validate,

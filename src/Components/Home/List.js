@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Header from "../Headder/Header";
 import './List.css'
 import { useNavigate } from "react-router-dom";
@@ -53,9 +53,9 @@ function List() {
         e.target.classList.add('active')
     }
 
-    const handleClick = (e) => {
+    const handleClick = useCallback((e) => {
         navigate(`/project/${e.target.id}`)
-    }
+    }, [])
 
     return (
         <>

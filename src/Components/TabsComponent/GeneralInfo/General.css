@@ -1,7 +1,9 @@
 .general-info{
     width: 100%;
     display: flex;
-    font-size: 18px;
+}
+table{
+    font-size: 16px;
 }
 .general-info thead{
     width: 30%;
