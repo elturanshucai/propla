@@ -4,12 +4,17 @@ import List from './Components/Home/List';
 import "./App.css"
 import Login from './Components/Login/Login';
 import Details from './Components/ProjectDetails/Details';
+import Protected from './Components/Protected';
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/list' element={<List/>} />
+          <Route 
+          path='/list' 
+          element={
+            <Protected> <List/> </Protected>
+          } />
           <Route path='/login' element={<Login/>} />
           <Route path='/project/:id' element={<Details/>} />
         </Routes>

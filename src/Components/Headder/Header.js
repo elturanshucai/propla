@@ -9,7 +9,10 @@ function Header(){
     }
     return  (
         <div className="head">
-            <img src={img} onClick={handleClick} />
+            <div className="logo"  onClick={handleClick}>
+                <img src={img}/>
+                <p>ProPla</p>
+            </div>
             <div className="links">
                 <Link to="/list">Home</Link>
                 <Link to="/login">Log Out</Link>

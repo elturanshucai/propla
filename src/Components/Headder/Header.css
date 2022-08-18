@@ -32,8 +32,15 @@
 .head a:last-child:hover{
     background-color: #bb1e10;
 }
-.head img{
-    width: 90px;
-    height: 90px;
+.head .logo{
     cursor: pointer;
+}
+.head img{
+    width: 60px;
+    height: 60px;
+}
+.head p{
+    color: antiquewhite;
+    font-size: 18px;
+    font-weight: 500;
 }
