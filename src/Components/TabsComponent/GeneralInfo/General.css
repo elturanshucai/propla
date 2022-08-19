@@ -30,3 +30,16 @@ table{
     gap: 30px;
     padding: 25px 50px;
 }
+
+
+@media screen and (max-width: 1000px) {
+    
+    table thead td{
+        font-size: 14px;
+    }
+    
+    table tbody{
+        font-size: 14px;
+    }
+    
+}

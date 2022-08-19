@@ -7,6 +7,11 @@ function Header(){
     const handleClick=()=>{
         navigate('/list')
     }
+
+    const deleteToken=()=>{
+        localStorage.removeItem('token')
+    } 
+
     return  (
         <div className="head">
             <div className="logo"  onClick={handleClick}>
@@ -15,7 +20,7 @@ function Header(){
             </div>
             <div className="links">
                 <Link to="/list">Home</Link>
-                <Link to="/login">Log Out</Link>
+                <Link to="/login" onClick={deleteToken}>Log Out</Link>
             </div>
         </div>
     )

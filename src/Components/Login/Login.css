@@ -6,12 +6,20 @@
     height: 100vh;
     width: 40%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #003666;
+    
+    color: whitesmoke;
+    font-size: 50px;
 }
 .login-left img{
     width: 400px;
+    animation: spinx 6s linear infinite;
+}
+.login-left p{
+    margin-top: 40px;
     animation: spinx 6s linear infinite;
 }
 @keyframes spinx{

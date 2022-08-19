@@ -1,6 +1,5 @@
 .projectusers{
     width: 100%;
-    font-size: 16px;
 }
 .projectusers thead{
     background-color: #203143;
@@ -21,4 +20,14 @@
 .projectusers tbody td{
     text-align: center;
     padding: 20px 0;
+}
+
+@media screen and (max-width: 1000px) {
+    .projectusers thead td{
+        font-size: 14px;
+        width: 12%;
+        padding: 10px 0;
+        text-align: center;
+        font-weight: 500;
+    }
 }

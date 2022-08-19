@@ -1,13 +1,15 @@
-import React, { useState} from "react";
-import {Navigate} from "react-router-dom"
+import React from "react";
+import {useNavigate } from "react-router-dom"
 
-function Protected({login, children}){
-    // if(!login && !localStorage.getItem('token')){
-    //     return <Navigate to='/login' replace />
-    // }
-    
-    return children
-    
+function Protected({ login, children }) {
+    const navigate = useNavigate()
+
+    if(login){
+        return children
+    }
+    else{
+        window.location.href = 'login';
+    }
 }
 
 export default Protected

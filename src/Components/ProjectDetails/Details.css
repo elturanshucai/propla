@@ -43,5 +43,16 @@
 .details .content{
     width: 80%;
     margin: 30px auto;
-    background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 1200px) {
+    .details .content{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .details .content{
+        width: 95%;
+    }
 }

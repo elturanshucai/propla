@@ -4,6 +4,7 @@ import React, { useCallback, useState } from "react";
 import Header from "../Headder/Header";
 import './List.css'
 import { useNavigate } from "react-router-dom";
+import img from '../../logo_transparent.png'
 
 function List() {
     const [id, setId] = useState(1)
@@ -29,7 +30,19 @@ function List() {
             id: 5
         },
     ])
+    const [text, setText] = useState('')
+    const [search, setSearch] = useState('')
 
+    const handleText = useCallback((e) => {
+        setText(e.target.value)
+    }, [])
+
+    const handleSearch = useCallback(() => {
+        setSearch(text)
+    }, [])
+
+
+    
     const createPages = (l) => {
         let n = l / 9
         if (n * 9 < l) {
@@ -63,16 +76,17 @@ function List() {
 
             <div className="main">
                 <div className="search">
-                    <input type="text" placeholder="Search Project.." />
-                    <button>
+                    <input type="text" placeholder="Search Project.." onChange={handleText} />
+                    <button onClick={handleSearch}>
                         <FontAwesomeIcon icon={faSearch} height="27px" />
                     </button>
                 </div>
 
                 <div className="list">
                     {list.map(item => (
-                        <div className="item" key={item.id}>
-                            <div className='iteminner' id={item.id} onClick={handleClick}> {item.projectName} <FontAwesomeIcon icon={faArrowRight}/> </div>
+                        <div className="item" key={item.id} id={item.id} onClick={handleClick}>
+                            <img src={img} />
+                            <div className="title">{item.projectName} <FontAwesomeIcon icon={faArrowRight} /></div>
                         </div>
                     ))}
                 </div>
