@@ -1,33 +1,42 @@
-.projectusers{
+.projectusers {
     width: 100%;
+    margin: 0 auto;
 }
-.projectusers thead{
+
+.projectusers thead {
     background-color: #203143;
     color: antiquewhite;
 }
-.projectusers thead td{
+
+.projectusers thead td {
     width: 12%;
-    padding: 20px 0;
+    padding: 20px 5px;
     text-align: center;
     font-weight: 500;
 }
-.projectusers thead #mail{
+
+.projectusers thead #mail {
     width: 14%;
 }
-.projectusers tbody{
+
+.projectusers tbody {
     background-color: #f2f7f9;
 }
-.projectusers tbody td{
+
+.projectusers tbody td {
     text-align: center;
     padding: 20px 0;
 }
 
-@media screen and (max-width: 1000px) {
-    .projectusers thead td{
-        font-size: 14px;
-        width: 12%;
-        padding: 10px 0;
-        text-align: center;
-        font-weight: 500;
+@media screen and (max-width: 1280px) {
+    .projectusers {
+        display: block;
+        overflow-x: auto;
     }
+
+    .projectusers thead td {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+
 }

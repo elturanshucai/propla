@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faSearch } from "@fortawesome/free-solid-svg-icons";
-import React, { useCallback, useState } from "react";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "../Headder/Header";
 import './List.css'
 import { useNavigate } from "react-router-dom";
 import img from '../../logo_transparent.png'
+import { Pagination } from "../Pagination";
 
 function List() {
-    const [id, setId] = useState(1)
+
     const [list, setList] = useState([
         {
             projectName: 'AzNav',
@@ -29,42 +30,112 @@ function List() {
             projectName: 'GHI',
             id: 5
         },
+        {
+            projectName: 'GHI',
+            id: 6
+        },
+        {
+            projectName: 'GHI',
+            id: 7
+        },
+        {
+            projectName: 'GHI',
+            id: 8
+        },
+        {
+            projectName: 'GHI',
+            id: 9
+        },
+        {
+            projectName: 'GHI',
+            id: 10
+        },
+        {
+            projectName: 'GHI',
+            id: 11
+        },
+        {
+            projectName: 'GHI',
+            id: 12
+        },
+        {
+            projectName: 'GHI',
+            id: 13
+        },
+        {
+            projectName: 'GHI',
+            id: 14
+        },
+        {
+            projectName: 'GHI',
+            id: 15
+        },
+        {
+            projectName: 'GHI',
+            id: 16
+        },
+        {
+            projectName: 'JKL',
+            id: 17
+        },
+        {
+            projectName: 'JKL',
+            id: 18
+        },
+        {
+            projectName: 'JKL',
+            id: 19
+        },
+        {
+            projectName: 'JKL',
+            id: 20
+        },
+        {
+            projectName: 'JKL',
+            id: 21
+        },
+        {
+            projectName: 'JKL',
+            id: 22
+        },
+        {
+            projectName: 'JKL',
+            id: 23
+        },
+        {
+            projectName: 'JKL',
+            id: 24
+        },
+        {
+            projectName: 'JKL',
+            id: 25
+        },
     ])
-    const [text, setText] = useState('')
-    const [search, setSearch] = useState('')
+
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(9)
+
+
+    //her sehifedeki postlarim
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost)
+
+    //sehife kecidleri
+    const paginate = pageNumber => setCurrentPage(pageNumber)
+
+
+    const [newList, setNewList] = useState([])
 
     const handleText = useCallback((e) => {
-        setText(e.target.value)
+        let input = (e.target.value).toLowerCase()
+        let searchList = list.filter(item => item.projectName.toLowerCase().includes(input))
+        setNewList(searchList)
     }, [])
 
-    const handleSearch = useCallback(() => {
-        setSearch(text)
-    }, [])
-
-
-    
-    const createPages = (l) => {
-        let n = l / 9
-        if (n * 9 < l) {
-            n++
-        }
-        for (let i = 1; i <= n; i++) {
-            for (let j = i; j <= n; j++) {
-                return <div id={i} onClick={setPages} className='active'>{i}</div>
-            }
-        }
-    }
 
     const navigate = useNavigate()
 
-    const setPages = (e) => {
-        setId(parseInt(e.target.id))
-        let divs = document.querySelectorAll('.pages div')
-        divs.forEach(div => {
-            div.classList.remove('active')
-        })
-        e.target.classList.add('active')
-    }
 
     const handleClick = useCallback((e) => {
         navigate(`/project/${e.target.id}`)
@@ -77,22 +148,27 @@ function List() {
             <div className="main">
                 <div className="search">
                     <input type="text" placeholder="Search Project.." onChange={handleText} />
-                    <button onClick={handleSearch}>
-                        <FontAwesomeIcon icon={faSearch} height="27px" />
-                    </button>
                 </div>
 
                 <div className="list">
-                    {list.map(item => (
-                        <div className="item" key={item.id} id={item.id} onClick={handleClick}>
-                            <img src={img} />
-                            <div className="title">{item.projectName} <FontAwesomeIcon icon={faArrowRight} /></div>
-                        </div>
-                    ))}
+                    {
+                        newList.length > 0 ?
+                            (newList.map(item => (
+                                <div className="item" key={item.id} id={item.id} onClick={handleClick}>
+                                    <img src={img} id={item.id} />
+                                    <div className="title" id={item.id}>{item.projectName} <FontAwesomeIcon icon={faArrowRight} id={item.id} /></div>
+                                </div>
+                            ))) :
+                            (currentPosts.map(item => (
+                                <div className="item" key={item.id} id={item.id} onClick={handleClick}>
+                                    <img src={img} id={item.id} />
+                                    <div className="title" id={item.id}>{item.projectName} <FontAwesomeIcon icon={faArrowRight} id={item.id} /></div>
+                                </div>
+                            )))
+                    }
+
                 </div>
-                <div className="pages">
-                    {createPages(list.length)}
-                </div>
+                <Pagination postsPerPage={postsPerPage} totalPosts={list.length} paginate={paginate} />
             </div>
 
         </>

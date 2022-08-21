@@ -41,5 +41,9 @@ table{
     table tbody{
         font-size: 14px;
     }
+
+    .general-info tbody tr{
+        padding: 25px 20px;
+    }
     
 }

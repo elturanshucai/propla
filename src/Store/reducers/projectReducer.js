@@ -3,17 +3,17 @@ import { createSlice } from "@reduxjs/toolkit"
 export const projectSlice = createSlice({
     name: 'propla',
     initialState: {
-        projectList: [],
-        searchedList: []
+        login: false
     },
     reducers: {
-        setProjectList: (state, {payload})=>{
-            state.projectList=[payload]
+        fnLogin: (state) => {
+            state.login = true
         },
-        setSearchedList: (state, {payload})=>{
-            state.searchedList=state.projectList.filter(item=>item.projectName.includes(payload))
-        }
+        fnLogout: (state) => {
+            state.login = false
+        },
     }
 })
 
+export const { fnLogin, fnLogout } = projectSlice.actions
 export default projectSlice.reducer

@@ -14,8 +14,8 @@ function GitRepoLink(){
                 <tbody>
                     <tr>
                         <td>Tekuis gitlab</td>
-                        <td>http://tekuisgitlab.emdkdedrx.gov.az/root/tekuis</td>
-                        <td></td>
+                        <td>http://teku</td>
+                        <td>fjheüqhfouehü</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,52 +1,75 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import logo from '../../logo_transparent.png'
 import "./Login.css"
-import { user } from '../../data'
+// import { user } from '../../data'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
-const validate = values => {
-    let errors = {}
+import { useDispatch } from "react-redux/es/exports";
+import { fnLogin } from "../../Store/reducers/projectReducer";
+import * as Yup from 'yup'
 
-    if (!values.username) {
-        errors.username = 'Required'
-    }
-    else if (values.username !== user.username) {
-        errors.username = 'Wrong Username'
-    }
+const validationSchema=Yup.object({
+    username: Yup.string()
+        .required('Ad boş qoyula bilməz'),
+    password: Yup.string()
+        .required('Parol boş qoyula bilməz')
+})
 
-    if (!values.password) {
-        errors.password = 'Required'
-    }
-    else if (values.password !== user.password) {
-        errors.password = 'Wrong Password'
-    }
-    return errors
-}
+// const validate = values => {
+//     let errors = {}
+
+//     if (!values.username) {
+//         errors.username = 'Ad boş qoyula bilməz'
+//     }
+//     else if (values.username !== user.username) {
+//         errors.username = 'İstifadəçi adı düzgün deyil'
+//     }
+
+//     if (!values.password) {
+//         errors.password = 'Parol boş qoyula bilməz'
+//     }
+//     else if (values.password !== user.password) {
+//         errors.password = 'Parol düzgün deyil'
+//     }
+//     return errors
+// }
 
 function Login() {
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [alert, setAlert] = useState(false)
+
     const formik = useFormik({
         initialValues: {
             username: '',
             password: ''
         },
         onSubmit: async values => {
+
             try {
                 const res = await axios.post('login', values);
-                console.log(res.data);
-
                 if (res.data) {
-                    navigate('/list')
-                    localStorage.token = res.data;
-                    
+                    navigate('/')
+                    localStorage.setItem('token', res.data)
+                    dispatch(fnLogin())
                 }
             } catch (err) {
-                console.log(err);
+                console.log(err.response);
             }
+
         },
-        validate,
+        validationSchema,
     })
+
+    const alertFn = () => {
+        if (formik.errors.username || formik.errors.password) {
+            setAlert(true)
+            setTimeout(()=>setAlert(false), 2500)
+        }
+    }
+
     return (
         <div className="login">
             <div className="login-left">
@@ -56,14 +79,26 @@ function Login() {
             <div className="login-right">
                 <div className="box">
                     <div className="box-inner">
+                        <div className="logo">
+                            <img src={logo} />
+                            <p>ProPla</p>
+                        </div>
                         <form onSubmit={formik.handleSubmit}>
                             <h2>Sign In</h2>
                             <input placeholder="username*" id="username" type="text" value={formik.values.username} onChange={formik.handleChange} />
                             <input placeholder="password*" id="password" type="password" value={formik.values.password} onChange={formik.handleChange} />
-                            <button type="submit">Login</button>
+                            <button type="submit" onClick={alertFn}>Login</button>
                         </form>
                     </div>
                 </div>
+
+                {
+                    alert && 
+                    <div className="alert">
+                        <p>{formik.errors.username && formik.errors.username}</p>
+                        <p>{formik.errors.password && formik.errors.password}</p>
+                    </div>
+                }
             </div>
         </div>
     )
