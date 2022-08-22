@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Header from '../Headder/Header'
+import Header from '../Header/Header'
 import GeneralInfo from '../TabsComponent/GeneralInfo/GeneralInfo'
 import GitRepoLink from '../TabsComponent/GitRepoLinks/GitRepoLink'
 import ProjectUser from '../TabsComponent/ProjectUsers/ProjectUser'

@@ -6,9 +6,9 @@ import Login from './Components/Login/Login';
 import Details from './Components/ProjectDetails/Details';
 import Protected from './Components/Protected';
 
+
 function App() {
 
-  
   return (
     <>
       <BrowserRouter>
@@ -18,13 +18,13 @@ function App() {
             element={
               <Protected> <List /> </Protected>
             } />
+
           <Route path='/login' element={<Login />} />
 
-          <Route path='/project/:id' element={
-          <Protected>
-            <Details />
-          </Protected>
-          } />
+          <Route path='/project/:id'
+            element={
+              <Protected> <Details /> </Protected>
+            } />
         </Routes>
       </BrowserRouter>
     </>

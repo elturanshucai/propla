@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import React, { useCallback, useEffect, useState } from "react";
-import Header from "../Headder/Header";
+import Header from "../Header/Header";
 import './List.css'
 import { useNavigate } from "react-router-dom";
 import img from '../../logo_transparent.png'
@@ -112,30 +112,52 @@ function List() {
         },
     ])
 
+    const [newList, setNewList] = useState([])
+
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(9)
+
+    useEffect(()=>{
+        if(localStorage.page){
+            setCurrentPage(parseInt(localStorage.getItem('page')))
+        }
+        
+    },[])
 
 
     //her sehifedeki postlarim
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirstPost = indexOfLastPost - postsPerPage
-    const currentPosts = list.slice(indexOfFirstPost, indexOfLastPost)
+
+    let currentPosts
+
+    if(newList.length>0){
+        currentPosts = newList.slice(indexOfFirstPost, indexOfLastPost)
+    }
+    else{
+        currentPosts = list.slice(indexOfFirstPost, indexOfLastPost)
+    }
+    
 
     //sehife kecidleri
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
 
-    const [newList, setNewList] = useState([])
+    
 
     const handleText = useCallback((e) => {
         let input = (e.target.value).toLowerCase()
-        let searchList = list.filter(item => item.projectName.toLowerCase().includes(input))
-        setNewList(searchList)
+        if (input.trim() === '') {
+            setNewList([])
+        }
+        else {
+            let searchList = list.filter(item => item.projectName.toLowerCase().includes(input))
+            setNewList(searchList)
+        }
     }, [])
 
 
     const navigate = useNavigate()
-
 
     const handleClick = useCallback((e) => {
         navigate(`/project/${e.target.id}`)
@@ -169,6 +191,7 @@ function List() {
 
                 </div>
                 <Pagination postsPerPage={postsPerPage} totalPosts={list.length} paginate={paginate} />
+                
             </div>
 
         </>

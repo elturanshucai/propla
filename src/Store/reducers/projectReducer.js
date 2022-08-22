@@ -12,6 +12,7 @@ export const projectSlice = createSlice({
         fnLogout: (state) => {
             state.login = false
         },
+        
     }
 })
 

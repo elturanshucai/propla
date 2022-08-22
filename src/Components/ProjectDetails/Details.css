@@ -23,6 +23,7 @@
     border: none;
     font-size: 14px;
     background-color: #e6e6e6;
+    transition: all 200ms;
 }
 .details .tabs button:hover{
     background-color: #d4d7da;

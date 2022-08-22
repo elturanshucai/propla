@@ -2,7 +2,6 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import logo from '../../logo_transparent.png'
 import "./Login.css"
-// import { user } from '../../data'
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux/es/exports";
@@ -16,25 +15,6 @@ const validationSchema=Yup.object({
         .required('Parol boş qoyula bilməz')
 })
 
-// const validate = values => {
-//     let errors = {}
-
-//     if (!values.username) {
-//         errors.username = 'Ad boş qoyula bilməz'
-//     }
-//     else if (values.username !== user.username) {
-//         errors.username = 'İstifadəçi adı düzgün deyil'
-//     }
-
-//     if (!values.password) {
-//         errors.password = 'Parol boş qoyula bilməz'
-//     }
-//     else if (values.password !== user.password) {
-//         errors.password = 'Parol düzgün deyil'
-//     }
-//     return errors
-// }
-
 function Login() {
 
     const navigate = useNavigate()
@@ -46,6 +26,7 @@ function Login() {
             username: '',
             password: ''
         },
+        
         onSubmit: async values => {
 
             try {
@@ -54,6 +35,11 @@ function Login() {
                     navigate('/')
                     localStorage.setItem('token', res.data)
                     dispatch(fnLogin())
+                }
+                else{
+                    formik.errors.verify='Ad ve ya parol sehvdir'
+                    setAlert(true)
+                    setTimeout(()=>setAlert(false), 2500)
                 }
             } catch (err) {
                 console.log(err.response);
@@ -87,7 +73,7 @@ function Login() {
                             <h2>Sign In</h2>
                             <input placeholder="username*" id="username" type="text" value={formik.values.username} onChange={formik.handleChange} />
                             <input placeholder="password*" id="password" type="password" value={formik.values.password} onChange={formik.handleChange} />
-                            <button type="submit" onClick={alertFn}>Login</button>
+                            <button type="submit" onClick={alertFn} >Login</button>
                         </form>
                     </div>
                 </div>
@@ -97,6 +83,7 @@ function Login() {
                     <div className="alert">
                         <p>{formik.errors.username && formik.errors.username}</p>
                         <p>{formik.errors.password && formik.errors.password}</p>
+                        <p>{formik.errors.verify && formik.errors.verify}</p>
                     </div>
                 }
             </div>

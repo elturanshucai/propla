@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
 
-    useEffect(()=>{
-        
+    const [localPage, setLocalPage] = useState(1)
+
+    const pageControll = useCallback(() => {
+        if (localStorage.page) {
+            setLocalPage(parseInt(localStorage?.getItem('page')))
+        }
     }, [])
+    useEffect(() => pageControll, [pageControll])
     const pageNumbers = []
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -15,7 +20,7 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         paginate(number)
         localStorage.setItem('page', number)
         let buttons = document.querySelectorAll('.pages button')
-        for (let i = 0; i <buttons.length; i++) {
+        for (let i = 0; i < buttons.length; i++) {
             buttons[i].classList.remove('active')
         }
         e.target.classList.add('active')
@@ -24,7 +29,7 @@ export const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     return (
         <div className='pages'>
             {pageNumbers.map(number => (
-                <button key={number} className={ number===1 ? 'active':null } onClick={(e) => setPages(number, e)}>
+                <button key={number} className={number === localPage ? 'active' : null} onClick={(e) => setPages(number, e)}>
                     {number}
                 </button>
             ))}
