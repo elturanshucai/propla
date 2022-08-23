@@ -6,123 +6,29 @@ import './List.css'
 import { useNavigate } from "react-router-dom";
 import img from '../../logo_transparent.png'
 import { Pagination } from "../Pagination";
+import axios from "axios";
 
 function List() {
 
-    const [list, setList] = useState([
-        {
-            projectName: 'AzNav',
-            id: 1
-        },
-        {
-            projectName: 'ABC',
-            id: 2
-        },
-        {
-            projectName: 'DEF',
-            id: 3
-        },
-        {
-            projectName: 'DEF',
-            id: 4
-        },
-        {
-            projectName: 'GHI',
-            id: 5
-        },
-        {
-            projectName: 'GHI',
-            id: 6
-        },
-        {
-            projectName: 'GHI',
-            id: 7
-        },
-        {
-            projectName: 'GHI',
-            id: 8
-        },
-        {
-            projectName: 'GHI',
-            id: 9
-        },
-        {
-            projectName: 'GHI',
-            id: 10
-        },
-        {
-            projectName: 'GHI',
-            id: 11
-        },
-        {
-            projectName: 'GHI',
-            id: 12
-        },
-        {
-            projectName: 'GHI',
-            id: 13
-        },
-        {
-            projectName: 'GHI',
-            id: 14
-        },
-        {
-            projectName: 'GHI',
-            id: 15
-        },
-        {
-            projectName: 'GHI',
-            id: 16
-        },
-        {
-            projectName: 'JKL',
-            id: 17
-        },
-        {
-            projectName: 'JKL',
-            id: 18
-        },
-        {
-            projectName: 'JKL',
-            id: 19
-        },
-        {
-            projectName: 'JKL',
-            id: 20
-        },
-        {
-            projectName: 'JKL',
-            id: 21
-        },
-        {
-            projectName: 'JKL',
-            id: 22
-        },
-        {
-            projectName: 'JKL',
-            id: 23
-        },
-        {
-            projectName: 'JKL',
-            id: 24
-        },
-        {
-            projectName: 'JKL',
-            id: 25
-        },
-    ])
+    const [list, setList] = useState([])
 
     const [newList, setNewList] = useState([])
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(9)
 
-    useEffect(()=>{
-        if(localStorage.page){
+    const getProjects = useCallback(() => {
+        axios.get(process.env.REACT_APP_PROJECT_URL)
+            .then(data => setList(data.data))
+    }, [])
+
+    useEffect(() => {
+        if (localStorage.page) {
             setCurrentPage(parseInt(localStorage.getItem('page')))
         }
-        
-    },[])
+        getProjects()
+
+    }, [getProjects])
 
 
     //her sehifedeki postlarim
@@ -131,19 +37,19 @@ function List() {
 
     let currentPosts
 
-    if(newList.length>0){
+    if (newList.length > 0) {
         currentPosts = newList.slice(indexOfFirstPost, indexOfLastPost)
     }
-    else{
+    else {
         currentPosts = list.slice(indexOfFirstPost, indexOfLastPost)
     }
-    
+
 
     //sehife kecidleri
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
 
-    
+
 
     const handleText = useCallback((e) => {
         let input = (e.target.value).toLowerCase()
@@ -191,7 +97,7 @@ function List() {
 
                 </div>
                 <Pagination postsPerPage={postsPerPage} totalPosts={list.length} paginate={paginate} />
-                
+
             </div>
 
         </>

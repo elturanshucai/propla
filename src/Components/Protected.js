@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom"
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fnLogin, fnLogout } from '../Store/reducers/projectReducer';
 import axios from "axios";
 
@@ -8,8 +8,7 @@ import axios from "axios";
 function Protected({ children }) {
 
   const dispatch=useDispatch()
-
-  const login=useSelector(state=>state.projectReducer.login)
+  const navigate=useNavigate()
 
   const verfiyToken = useCallback(async () => {
     try {
@@ -35,14 +34,7 @@ function Protected({ children }) {
 
 
   useEffect(() => verfiyToken, [verfiyToken]);
-
-   const navigate = useNavigate()
-   if(login===true){
-      return children
-   }
-   else{
-      navigate('/login')
-   }
+    return children
 }
 
 export default Protected
