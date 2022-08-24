@@ -10,7 +10,21 @@ import axios from "axios";
 
 function List() {
 
-    const [list, setList] = useState([])
+    const [list, setList] = useState([
+        {
+            projectName: "AzNav",
+            id: 1
+        },
+        {
+            projectName: "URIS",
+            id: 2
+        },
+        {
+            projectName: "DEQKIS",
+            id: 3
+        },
+        
+    ])
 
     const [newList, setNewList] = useState([])
 
@@ -18,8 +32,8 @@ function List() {
     const [postsPerPage] = useState(9)
 
     const getProjects = useCallback(() => {
-        axios.get(process.env.REACT_APP_PROJECT_URL)
-            .then(data => setList(data.data))
+        // axios.get(process.env.REACT_APP_PROJECT_URL)
+        //     .then(data => setList(data.data))
     }, [])
 
     useEffect(() => {
