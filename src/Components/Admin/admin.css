@@ -1,159 +1,23 @@
-::-webkit-scrollbar {
-    width: 8px;
-}
+.admin{
 
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
-    border-radius: 10px;
 }
-
-::-webkit-scrollbar-thumb {
-    background: #09347a;
-    border-radius: 10px;
-}
-
-.admin {
-    height: 100vh;
+.admin .admin-head{
+    padding: 0 100px;
     display: flex;
-    position: relative;
+    justify-content: end;
 }
-
-.admin .left {
-    width: 50%;
-    background-color: white;
-    padding: 30px 0;
-    overflow: auto;
-}
-
-.admin .left h2 {
-    font-weight: 500;
-    padding: 10px 20px;
-    border-bottom: 1px solid rgb(218, 218, 218);
-    margin-bottom: 20px;
-}
-
-.admin ul {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    justify-content: center;
-    gap: 20px;
-}
-
-.admin li {
-    width: 95%;
-    margin: 0 auto;
-    border-radius: 4px;
-    padding: 15px 10px;
-    font-size: 14px;
-    box-shadow: black 0px 0px 4px 0px;
-    cursor: pointer;
-}
-
-.panel{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-new{
-    width: 160px;
-    height: 50px;
-    border-radius: 4px;
-    border: none;
-    background-color: #0abf53;
-    font-size: 20px;
-    font-weight: 300;
-    color: white;
-    cursor: pointer;
-}
-.btn-new:hover{
-    background-color: #279b37;
-}
-
-.modal{
-    background-color: black;
-    opacity: 0.8;
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    overflow: auto;
-}
-.modal .cls-btn{
-    position: absolute;
-    top: 30px;
-    right: 50px;
-    cursor: pointer;
-}
-.modal .tabs{
-    width: fit-content;
-    margin: 30px auto;
-}
-.modal .tabs button{
-    border: none;
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-    font-size: 16px;
-    transition: all 300ms;
-    cursor: pointer;
-}
-.modal .tabs button:hover{
-    color: #caccd1;
-}
-.modal .tabs button.active{
-    color: #00d8ff;
-    border-bottom: 1px solid #00d8ff;
-}
-.modal .modal-inner{
-    opacity: 1;
-}
-.modal .content{
-    color: white;
-}
-.modal .content form{
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    margin: 0 auto;
-}
-.modal .content form.serverlink{
-    width: 50%;
-    overflow: auto;
-}
-.modal .content form input{
-    margin: 5px 0 25px;
-    height: 30px;
+.admin .add{
     outline: none;
-    padding-left: 8px;
-    font-size: 16px;
-}
-.modal .content form button{
-    width: 100px;
-    height: 40px;
+    border: none;
+    width: 150px;
+    height: 50px;
+    background-color: #63a541;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
     cursor: pointer;
-    font-size: 16px;
-    margin: 0 auto;
+    margin: 50px 0;
 }
-.modal .content form button.add{
-    position: absolute;
-    top: 135px;
-    right: 100px;
-}
-.modal .content .form-title{
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-.modal .form-title label{
-    display: flex;
-    align-items: center;
-}
-.modal .content .inputs{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.admin .add:hover{
+    background-color: #44883e;
 }

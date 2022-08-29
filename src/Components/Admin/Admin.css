@@ -1,0 +1,23 @@
+.admin{
+
+}
+.admin .admin-head{
+    padding: 0 100px;
+    display: flex;
+    justify-content: end;
+}
+.admin .add{
+    outline: none;
+    border: none;
+    width: 150px;
+    height: 50px;
+    background-color: #63a541;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 50px 0;
+}
+.admin .add:hover{
+    background-color: #44883e;
+}

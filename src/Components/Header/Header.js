@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import "./Header.css"
 import img from '../../logo_transparent.png'
 import { fnLogout } from "../../Store/reducers/projectReducer";
