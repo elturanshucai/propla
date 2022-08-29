@@ -5,6 +5,7 @@ import "./App.css"
 import Login from './Components/Login/Login';
 import Details from './Components/ProjectDetails/Details';
 import Protected from './Components/Protected';
+import Admin from './Components/Admin/Admin';
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
             element={
               <Protected> <Details /> </Protected>
             } />
+
+          <Route path='/admin' element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </>

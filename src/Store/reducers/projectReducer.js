@@ -12,8 +12,8 @@ export const projectSlice = createSlice({
         fnLogout: (state) => {
             state.login = false
         },
-        
-    }
+
+    },
 })
 
 export const { fnLogin, fnLogout } = projectSlice.actions

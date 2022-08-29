@@ -49,8 +49,6 @@ function List() {
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
 
-
-
     const handleText = useCallback((e) => {
         let input = (e.target.value).toLowerCase()
         if (input.trim() === '') {
@@ -82,15 +80,15 @@ function List() {
                     {
                         newList.length > 0 ?
                             (newList.map(item => (
-                                <div className="item" key={item.id} id={item.id} onClick={handleClick}>
-                                    <img src={img} id={item.id} />
-                                    <div className="title" id={item.id}>{item.projectName} <FontAwesomeIcon icon={faArrowRight} id={item.id} /></div>
+                                <div className="item" key={item?.id} id={item?.id} onClick={handleClick}>
+                                    <img src={img} id={item?.id} />
+                                    <div className="title" id={item?.id}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
                                 </div>
                             ))) :
                             (currentPosts.map(item => (
-                                <div className="item" key={item.id} id={item.id} onClick={handleClick}>
-                                    <img src={img} id={item.id} />
-                                    <div className="title" id={item.id}>{item.projectName} <FontAwesomeIcon icon={faArrowRight} id={item.id} /></div>
+                                <div className="item" key={item?.id} id={item?.id} onClick={handleClick}>
+                                    <img src={img} id={item?.id} />
+                                    <div className="title" id={item?.id}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
                                 </div>
                             )))
                     }
