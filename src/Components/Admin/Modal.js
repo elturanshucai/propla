@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
-import './admin.css'
+import './Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GeneralForm from "./TabComponents/GeneralForm";
 import ServerLink from "./TabComponents/ServerLink";
+import GitRepoLink from "./TabComponents/GitRepoLink";
+import ProjectUsers from "./TabComponents/ProjectUsers";
 
 function Modal({ setModal }) {
 
@@ -30,6 +32,8 @@ function Modal({ setModal }) {
                     <div className="content">
                         {tabId === "info" && <GeneralForm />}
                         {tabId === "serverlink" && <ServerLink />}
+                        {tabId === "gitlink" && <GitRepoLink />}
+                        {tabId === "prusers" && <ProjectUsers />}
                     </div>
                 </div>
             </div>

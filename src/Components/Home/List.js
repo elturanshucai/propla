@@ -10,21 +10,7 @@ import axios from "axios";
 
 function List() {
 
-    const [list, setList] = useState([
-        {
-            projectName: "AzNav",
-            id: 1
-        },
-        {
-            projectName: "URIS",
-            id: 2
-        },
-        {
-            projectName: "DEQKIS",
-            id: 3
-        },
-        
-    ])
+    const [list, setList] = useState([])
 
     const [newList, setNewList] = useState([])
 
@@ -32,8 +18,8 @@ function List() {
     const [postsPerPage] = useState(9)
 
     const getProjects = useCallback(() => {
-        // axios.get(process.env.REACT_APP_PROJECT_URL)
-        //     .then(data => setList(data.data))
+        axios.get(process.env.REACT_APP_PROJECT_URL)
+            .then(data => setList(data.data))
     }, [])
 
     useEffect(() => {
@@ -94,15 +80,15 @@ function List() {
                     {
                         newList.length > 0 ?
                             (newList.map(item => (
-                                <div className="item" key={item?.id} id={item?.id} onClick={handleClick}>
-                                    <img src={img} id={item?.id} />
-                                    <div className="title" id={item?.id}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
+                                <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
+                                    <img src={img} id={item?.projectId} />
+                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
                                 </div>
                             ))) :
                             (currentPosts.map(item => (
-                                <div className="item" key={item?.id} id={item?.id} onClick={handleClick}>
-                                    <img src={img} id={item?.id} />
-                                    <div className="title" id={item?.id}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
+                                <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
+                                    <img src={img} id={item?.projectId} />
+                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
                                 </div>
                             )))
                     }

@@ -1,7 +1,18 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import "./General.css"
 
 function GeneralInfo() {
+
+    const [generalInfo, setGeneralInfo] = useState([])
+
+    useEffect(() => {
+        let link = window.location.href.split('/')
+        let id = link[link.length - 1]
+        axios.get('http://10.1.14.29:81/api/GeneralInfo' + `/${id}`).then(data => setGeneralInfo(data.data))
+
+    }, [])
+
     return (
         <>
             <table className='general-info'>
@@ -15,13 +26,16 @@ function GeneralInfo() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Ünvan Reyestri İnformasiya Sistemi</td>
-                        <td>Ünvan məlumatlarının idarə edilməsi sistemi</td>
-                        <td>ITMIM</td>
-                        <td>2019-09-16</td>
-                        <td>129</td>
-                    </tr>
+                    {generalInfo.map((item,index) => (
+                        <tr key={index}>
+                            <td>{item?.projectFullname}</td>
+                            <td>{item?.projectDescription}</td>
+                            <td>{item?.createdBy}</td>
+                            <td>{item?.productionDate}</td>
+                            <td>{item?.userCount}</td>
+                        </tr>
+                    ))}
+
                 </tbody>
             </table>
         </>

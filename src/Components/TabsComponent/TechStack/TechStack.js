@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './TechStack.css'
 
-function TechStack(){
+function TechStack() {
+
+    const [tech, setTech] = useState([])
+
+    useEffect(() => {
+        let link = window.location.href.split('/')
+        let id = link[link.length - 1]
+        axios.get('http://10.1.14.29:81/api/TechStack' + `/${id}`).then(data => setTech(data.data))
+    }, [])
+    console.log(tech);
+
     return (
         <>
             <table className="tech" cellPadding={0} cellSpacing={0}>
@@ -11,15 +22,12 @@ function TechStack(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>HTML</td>
-                    </tr>
-                    <tr>
-                        <td>CSS</td>
-                    </tr>
-                    <tr>
-                        <td>JavaScript</td>
-                    </tr>
+                    {tech.map((item, index) => (
+                        <tr key={index}>
+                            <td>{item?.programName}</td>
+                        </tr>
+                    ))}
+
                 </tbody>
             </table>
         </>

@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './Project.css'
 
 function ProjectUser(){
+
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        let link = window.location.href.split('/')
+        let id = link[link.length - 1]
+        axios.get('http://10.1.14.29:81/api/GitRepoLink' + `/${id}`).then(data => setUsers(data.data))
+
+    }, [])
+
     return (
         <>
             <table className="projectusers" cellPadding={0} cellSpacing={0}>

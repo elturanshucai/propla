@@ -9,16 +9,17 @@ table{
     width: 30%;
 }
 .general-info thead tr{
-    padding: 25px 0;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     font-weight: 500;
     background-color: #203143;
     color: antiquewhite;
 }
 .general-info thead td{
-    text-align: center;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .general-info tbody{
     background-color: #f2f7f9;
@@ -27,8 +28,12 @@ table{
 .general-info tbody tr{
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 25px 50px;
+}
+.general-info tbody td{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
 }
 
 
