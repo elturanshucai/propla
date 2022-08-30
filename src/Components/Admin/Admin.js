@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -39,28 +38,4 @@ function Admin() {
         </>
     )
 }
-
-=======
-import React, { useState } from 'react';
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './Admin.css'
-
-function Admin() {
-
-    const [display, setDisplay] = useState(false)
-    const [projects, setProjects] = useState([])
-
-    return (
-        <>
-            <div className='admin'>
-                <div className='admin-head'>
-                    <button className='add'> <FontAwesomeIcon icon={faPlus} /> </button>
-                </div>
-            </div>
-        </>
-    )
-}
-
->>>>>>> 7ca95a059d8bcdc3511ead4f8a5c6fcdf9d98ffd
 export default Admin
