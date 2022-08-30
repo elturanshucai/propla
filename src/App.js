@@ -26,12 +26,8 @@ function App() {
             element={
               <Protected> <Details /> </Protected>
             } />
-<<<<<<< HEAD
 
           <Route path='/admin' element={<Admin />} />
-=======
-          <Route path='admin' element={<Admin />} />
->>>>>>> 7ca95a059d8bcdc3511ead4f8a5c6fcdf9d98ffd
         </Routes>
       </BrowserRouter>
     </>
