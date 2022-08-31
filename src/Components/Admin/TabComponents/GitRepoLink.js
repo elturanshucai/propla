@@ -11,7 +11,6 @@ function GitRepoLink() {
             [e.target.name]: e.target.value
         })
     }
-    console.log(gitData)
 
 
     const handleSubmit = (e) => {

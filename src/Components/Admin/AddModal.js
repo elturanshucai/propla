@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Admin.css'
 
-function AddModal() {
+function AddModal({ closeModal }) {
 
     const [project, setProject] = useState({})
 
@@ -14,12 +16,13 @@ function AddModal() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://10.1.14.29:81/api/ProjectInfo', project)
+        axios.post('http://10.1.14.29:81/api/ProjectInfo', project).then(data=>console.log(data))
     }
 
     return (
         <>
             <div className="modal">
+                <FontAwesomeIcon icon={faClose} className="cls-btn" size="2x" color="white" onClick={() => closeModal(false)} />
                 <form className="addModal" onSubmit={(e) => handleSubmit(e)}>
                     <label htmlFor="projectName">Project Name</label>
                     <input id="projectName" type="text" name="projectName" onChange={(e) => handleChange(e)} />

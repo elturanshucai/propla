@@ -11,7 +11,6 @@ function ServerLink() {
             [e.target.name]: e.target.value
         })
     }
-    console.log(serverData)
 
 
     const handleSubmit = (e) => {

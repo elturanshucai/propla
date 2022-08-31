@@ -13,6 +13,7 @@ function Admin() {
     const [list, setList] = useState([])
     const [modal, setModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
+    const [edit, setEdit]=useState()
 
     const getProjects = useCallback(() => {
         axios.get(process.env.REACT_APP_PROJECT_URL)
@@ -20,14 +21,22 @@ function Admin() {
     }, [])
 
 
-    const deleteProject = (id) =>{
+    const deleteProject = (id) => {
         console.log(id);
-        axios.delete('http://10.1.14.29:81/api/ProjectInfo/' + `${id}`).then(data=>console.log(data))
+        axios.delete('http://10.1.14.29:81/api/ProjectInfo/' + `${id}`).then(data => console.log(data))
+    }
+
+    const editProject = (id) => {
+        setEdit(id)
+        setModal(true)
     }
 
     useEffect(() => {
         getProjects()
     }, [getProjects])
+
+
+
     return (
         <>
             <div className='admin'>
@@ -36,8 +45,8 @@ function Admin() {
                     <ul className='projectList'>
                         {list.length > 0 ?
                             list.map((item, index) => (
-                                <li key={index} id={item?.projectId}> {item?.projectName} 
-                                <div><FontAwesomeIcon icon={faEdit} size={'lg'} className="edit" onClick={() => setModal(true)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={()=>deleteProject(item?.projectId)} /></div> </li>
+                                <li key={index} > {item?.projectName}
+                                    <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
                             )) :
                             <div>Siyahi bosdur</div>
                         }
@@ -46,8 +55,8 @@ function Admin() {
                 <div className='panel'>
                     <button className='btn-new' onClick={() => setAddModal(true)}> Yeni Proyekt <FontAwesomeIcon icon={faPlus} /> </button>
                 </div>
-                {modal && <Modal setModal={setModal} />}
-                {addModal && <AddModal />}
+                {modal && <Modal setModal={setModal} id={edit} />}
+                {addModal && <AddModal closeModal={setAddModal} />}
 
             </div>
         </>

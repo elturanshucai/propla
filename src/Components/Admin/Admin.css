@@ -53,7 +53,7 @@
     justify-content: space-between;
 }
 
-.admin li div{
+.admin li div {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -62,10 +62,12 @@
 .admin li svg {
     cursor: pointer;
 }
-.admin li svg:first-child{
+
+.admin li svg:first-child {
     color: rgb(4, 0, 255);
 }
-.admin li svg:last-child{
+
+.admin li svg:last-child {
     color: red;
 }
 
@@ -95,8 +97,7 @@
 }
 
 .modal {
-    background-color: black;
-    opacity: 0.8;
+    background-color: rgba(0,0,0,0.8);
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -165,7 +166,7 @@
 .modal .addModal input {
     margin: 10px 0 25px;
     outline: none;
-    height: 30px;
+    height: 40px;
     font-size: 16px;
     padding: 0 8px;
 }
@@ -180,7 +181,7 @@
 
 .modal .content form input {
     margin: 5px 0 25px;
-    height: 30px;
+    height: 35px;
     outline: none;
     padding-left: 8px;
     font-size: 16px;
@@ -210,4 +211,36 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.modal .tech{
+    width: fit-content;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+.modal .tech label{
+    margin-bottom: 10px;
+}
+.modal .tech .techList{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5px;
+    column-gap: 5px;
+    color: black;
+    max-width: 350px;
+}
+.modal .tech .techItem{
+    padding: 5px 8px;
+    border: none;
+    border-radius: 3px;
+    background-color: #caccd1;
+}
+.modal .tech input{
+    margin: 10px 0 30px;
+    width: 100%;
+    height: 40px;
+    outline: none;
+    padding: 0 8px;
+    font-size: 16px;
 }

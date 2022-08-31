@@ -49,7 +49,7 @@ function List() {
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
 
-    const handleText = useCallback((e) => {
+    const handleText = (e) => {
         let input = (e.target.value).toLowerCase()
         if (input.trim() === '') {
             setNewList([])
@@ -58,7 +58,7 @@ function List() {
             let searchList = list.filter(item => item.projectName.toLowerCase().includes(input))
             setNewList(searchList)
         }
-    }, [])
+    }
 
 
     const navigate = useNavigate()
@@ -82,13 +82,13 @@ function List() {
                             (newList.map(item => (
                                 <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
                                     <img src={img} id={item?.projectId} />
-                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
+                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.projectId} /></div>
                                 </div>
                             ))) :
                             (currentPosts.map(item => (
                                 <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
                                     <img src={img} id={item?.projectId} />
-                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.id} /></div>
+                                    <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.projectId} /></div>
                                 </div>
                             )))
                     }

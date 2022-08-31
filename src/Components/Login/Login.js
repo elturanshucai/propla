@@ -30,7 +30,7 @@ function Login() {
         onSubmit: async values => {
 
             try {
-                const res = await axios.post('login', values);
+                const res = await axios.post('http://localhost:5000/login', values);
                 if (res.data) {
                     navigate('/')
                     localStorage.setItem('token', res.data)

@@ -6,6 +6,7 @@ import axios from "axios";
 
 
 function Protected({ children }) {
+  axios.defaults.baseURL = 'http://localhost:5000/'
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -17,6 +18,8 @@ function Protected({ children }) {
         const res = await axios.post('verify', { token });
         
         if (res.data) {
+          
+          axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage?.getItem('token')
           dispatch(fnLogin())
         } else {
           localStorage.removeItem('token')
