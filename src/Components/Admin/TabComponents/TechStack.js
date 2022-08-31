@@ -18,13 +18,19 @@ function TechStack() {
         }
     }
 
+    const deleteTech = (i) => {
+        let newList = []
+        newList = techList.filter((item, index) => index !== i)
+        setTechList(newList)
+    }
+
     return (
         <>
             <div className="tech">
                 <label htmlFor="techName">Tech Name</label>
                 <div className="techList">
                     {techList.map((item, index) => (
-                        <div key={index} className="techItem"> {item} <FontAwesomeIcon icon={faClose} size={'sm'} /> </div>
+                        <div key={index} className="techItem"> {item} <FontAwesomeIcon icon={faClose} size={'sm'} onClick={() => deleteTech(index)} /> </div>
                     ))}
                 </div>
                 <input id="techName" type="text" value={techName} onChange={(e) => setTechName(e.target.value)} onKeyDown={(e) => addTech(e)} />
