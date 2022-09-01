@@ -12,12 +12,20 @@ function Admin() {
     const [list, setList] = useState([])
     const [modal, setModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
-    const [edit, setEdit]=useState()
+    const [edit, setEdit] = useState()
+
+    const [searchList, setSearchList] = useState([])
 
     const getProjects = useCallback(() => {
         axios.get(process.env.REACT_APP_PROJECT_URL)
             .then(data => setList(data.data))
     }, [])
+
+    const search = (input) => {
+        let newList = []
+        newList = list.filter(item => item.projectName.toLowerCase().includes(input))
+        setSearchList(newList)
+    }
 
 
     const deleteProject = (id) => {
@@ -40,14 +48,25 @@ function Admin() {
         <>
             <div className='admin'>
                 <div className='left'>
-                    <h2>Proyektler</h2>
+                    <div className="left-head">
+                        <h2>Proyektler</h2>
+                        <input type="text" placeholder="Search.." onChange={(e) => search(e.target.value)} />
+                    </div>
+
                     <ul className='projectList'>
-                        {list.length > 0 ?
+                        {
+                            searchList.length>0 ?
+                            searchList.map((item, index) => (
+                                <li key={index} > {item?.projectName}
+                                    <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
+                            )):
                             list.map((item, index) => (
                                 <li key={index} > {item?.projectName}
                                     <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
-                            )) :
-                            <div>Siyahi bosdur</div>
+                            ))
+                        }
+                        {
+                            list.length===0 && <div>Proyekt yoxdur</div>
                         }
                     </ul>
                 </div>

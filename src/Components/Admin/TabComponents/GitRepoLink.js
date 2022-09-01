@@ -3,6 +3,7 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import '../Admin.css'
+import EditModal from "../Modals/EditModal";
 
 function GitRepoLink({ id }) {
 
@@ -64,6 +65,7 @@ function GitRepoLink({ id }) {
 
                 <button className="btn-new" type="submit">Submit</button>
             </form>
+            {edit && <EditModal  />}
         </>
     )
 }
