@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EditModal from "../EditModal";
+import EditModal from "../Modals/EditModal";
 
 function ServerLink({ id }) {
 

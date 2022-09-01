@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from 'react-redux'
-import { fnLogin, fnLogout } from '../Store/reducers/projectReducer';
+import { fnLogin, fnLogout } from '../../Store/reducers/projectReducer';
 import axios from "axios";
 
 

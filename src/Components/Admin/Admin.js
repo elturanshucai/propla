@@ -4,8 +4,8 @@ import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import './Admin.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Modal from './Modal';
-import AddModal from './AddModal';
+import Modal from './Modals/Modal';
+import AddModal from './Modals/AddModal';
 
 function Admin() {
 

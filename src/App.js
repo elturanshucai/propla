@@ -4,7 +4,7 @@ import List from './Components/Home/List';
 import "./App.css"
 import Login from './Components/Login/Login';
 import Details from './Components/ProjectDetails/Details';
-import Protected from './Components/Protected';
+import Protected from './Components/UI/Protected';
 import Admin from './Components/Admin/Admin';
 
 

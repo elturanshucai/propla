@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import './List.css'
 import { useNavigate } from "react-router-dom";
 import img from '../../logo_transparent.png'
-import { Pagination } from "../Pagination";
+import { Pagination } from "../UI/Pagination";
 import axios from "axios";
 
 function List() {

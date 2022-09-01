@@ -7,8 +7,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux/es/exports";
 import { fnLogin } from "../../Store/reducers/projectReducer";
 import * as Yup from 'yup'
+import Loading from "../UI/Loading";
 
-const validationSchema=Yup.object({
+const validationSchema = Yup.object({
     username: Yup.string()
         .required('Ad boş qoyula bilməz'),
     password: Yup.string()
@@ -20,28 +21,32 @@ function Login() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [alert, setAlert] = useState(false)
-
+    const [loading, setLoading] = useState(false)
     const formik = useFormik({
         initialValues: {
             username: '',
             password: ''
         },
-        
+
         onSubmit: async values => {
 
             try {
+                setLoading(true)
                 const res = await axios.post('http://localhost:5000/login', values);
                 if (res.data) {
+                    setLoading(false)
                     navigate('/')
                     localStorage.setItem('token', res.data)
                     dispatch(fnLogin())
                 }
-                else{
-                    formik.errors.verify='Ad ve ya parol sehvdir'
+                else {
+                    setLoading(false)
+                    formik.errors.verify = 'Ad ve ya parol sehvdir'
                     setAlert(true)
-                    setTimeout(()=>setAlert(false), 2500)
+                    setTimeout(() => setAlert(false), 2500)
                 }
             } catch (err) {
+                setLoading(false)
                 console.log(err.response);
             }
 
@@ -52,12 +57,13 @@ function Login() {
     const alertFn = () => {
         if (formik.errors.username || formik.errors.password) {
             setAlert(true)
-            setTimeout(()=>setAlert(false), 2500)
+            setTimeout(() => setAlert(false), 2500)
         }
     }
 
     return (
         <div className="login">
+            {loading && <Loading />}
             <div className="login-left">
                 <img src={logo} />
                 <p>ProPla</p>
@@ -79,7 +85,7 @@ function Login() {
                 </div>
 
                 {
-                    alert && 
+                    alert &&
                     <div className="alert">
                         <p>{formik.errors.username && formik.errors.username}</p>
                         <p>{formik.errors.password && formik.errors.password}</p>
