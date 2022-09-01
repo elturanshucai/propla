@@ -97,7 +97,7 @@
 }
 
 .modal {
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0, 0, 0, 0.8);
     height: 100vh;
     width: 100vw;
     position: absolute;
@@ -153,6 +153,36 @@
 .modal .content form.link {
     width: 50%;
     overflow: auto;
+}
+
+.modal .content form.link .prevLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    color: black;
+    margin: 20px 0;
+    position: relative;
+}
+
+.modal form.link .prev-item {
+    display: flex;
+    justify-content: space-around;
+    background-color: #caccd1;
+    align-items: center;
+}
+
+.modal form.link .prev-item svg{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+.modal form.link .prev-item div{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 30%;
+    padding: 10px 0;
 }
 
 .modal .addModal {
@@ -213,16 +243,18 @@
     justify-content: space-around;
 }
 
-.modal .tech{
+.modal .tech {
     width: fit-content;
     margin: 20px auto;
     display: flex;
     flex-direction: column;
 }
-.modal .tech label{
+
+.modal .tech label {
     margin-bottom: 10px;
 }
-.modal .tech .techList{
+
+.modal .tech .techList {
     display: flex;
     flex-wrap: wrap;
     row-gap: 5px;
@@ -230,17 +262,68 @@
     color: black;
     max-width: 350px;
 }
-.modal .tech .techItem{
+
+.modal .tech .techItem {
     padding: 5px 8px;
     border: none;
     border-radius: 3px;
     background-color: #caccd1;
 }
-.modal .tech input{
+
+.modal .tech .techItem svg:hover {
+    color: red;
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+.modal .tech input {
     margin: 10px 0 30px;
     width: 100%;
     height: 40px;
     outline: none;
     padding: 0 8px;
     font-size: 16px;
+}
+
+.modal .tech button {
+    border: none;
+    border-radius: 2px;
+    height: 40px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #0abf53;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+}
+
+.modal .tech button:hover {
+    background-color: #279b37;
+}
+
+.modal .edit-div{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: #b1d4e5;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal .edit-div form{
+    width: 25%;
+}
+
+.modal .edit-div svg{
+    position: absolute;
+    top: 300px;
+    right: 300px;
+    cursor: pointer;
+}
+
+.modal .edit-div button{
+    
 }

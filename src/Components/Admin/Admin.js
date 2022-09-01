@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faRemove } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import './Admin.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

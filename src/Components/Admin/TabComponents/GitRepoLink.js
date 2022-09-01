@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 import '../Admin.css'
 
-function GitRepoLink() {
+function GitRepoLink({ id }) {
 
+    const [prevData, setPrevData] = useState([])
     const [gitData, setGitData] = useState({})
+    const [oldData, setOldData] = useState({})
+
+    const [edit, setEdit] = useState(false)
 
     const handleChange = (e) => {
         setGitData({
@@ -11,6 +18,19 @@ function GitRepoLink() {
             [e.target.name]: e.target.value
         })
     }
+
+    const editLink = (data) => {
+        setEdit(true)
+        setOldData(data)
+    }
+
+    const getData = () => {
+        axios.get(`http://10.1.14.29:81/api/GitRepoLink/${id}`).then(data => setPrevData(data.data))
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
 
 
     const handleSubmit = (e) => {
@@ -25,6 +45,16 @@ function GitRepoLink() {
                     <label htmlFor="name">Repo Name</label>
                     <label htmlFor="url">Repo URL</label>
                     <label htmlFor="desc">Repo Description</label>
+                </div>
+                <div className="prevLinks">
+                    {prevData.map(item => (
+                        <div className="prev-item" key={item?.gitRepolinkId} >
+                            <div>{item?.repoName} </div>
+                            <div>{item?.repoUrl} </div>
+                            <div>{item?.repoDescription} </div>
+                            <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
+                        </div>
+                    ))}
                 </div>
                 <div className="inputs">
                     <input id="name" onChange={(e) => handleChange(e)} name="name" />
