@@ -11,7 +11,6 @@ function TechStack() {
         let id = link[link.length - 1]
         axios.get('http://10.1.14.29:81/api/TechStack' + `/${id}`).then(data => setTech(data.data))
     }, [])
-    console.log(tech);
 
     return (
         <>

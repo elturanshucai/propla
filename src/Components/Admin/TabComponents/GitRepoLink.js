@@ -65,7 +65,7 @@ function GitRepoLink({ id }) {
 
                 <button className="btn-new" type="submit">Submit</button>
             </form>
-            {edit && <EditModal  />}
+            {edit && <EditModal setEdit={setEdit} />}
         </>
     )
 }

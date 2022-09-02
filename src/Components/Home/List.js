@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import img from '../../logo_transparent.png'
 import { Pagination } from "../UI/Pagination";
 import axios from "axios";
+import Loading from "../UI/Loading";
+
 
 function List() {
 
@@ -16,10 +18,21 @@ function List() {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(9)
+    const [loading, setLoading] = useState(false)
 
-    const getProjects = useCallback(() => {
-        axios.get(process.env.REACT_APP_PROJECT_URL)
-            .then(data => setList(data.data))
+    const getProjects = useCallback(async() => {
+
+        try {
+            setLoading(true)
+            const res = axios.get('http://10.1.14.29:81/api/ProjectInfo')
+            setList((await res).data)
+            if((await res).status){
+                setLoading(false)
+            }
+        } catch (err) {
+            setLoading(false)
+            console.log(err);
+        }
     }, [])
 
     useEffect(() => {
@@ -69,6 +82,7 @@ function List() {
 
     return (
         <>
+            {loading && <Loading/>}
             <Header />
 
             <div className="main">
@@ -81,13 +95,13 @@ function List() {
                         newList.length > 0 ?
                             (newList.map(item => (
                                 <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
-                                    <img src={img} id={item?.projectId} />
+                                    <img src={img} id={item?.projectId} alt='' />
                                     <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.projectId} /></div>
                                 </div>
                             ))) :
                             (currentPosts.map(item => (
                                 <div className="item" key={item?.projectId} id={item?.projectId} onClick={handleClick}>
-                                    <img src={img} id={item?.projectId} />
+                                    <img src={img} id={item?.projectId} alt='' />
                                     <div className="title" id={item?.projectId}>{item?.projectName} <FontAwesomeIcon icon={faArrowRight} id={item?.projectId} /></div>
                                 </div>
                             )))

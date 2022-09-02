@@ -1,29 +1,49 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useFormik } from "formik";
 import '../Admin.css'
 
 function GeneralForm({ id }) {
 
-    const [data, setData] = useState({})
-    const [prevData, setPrevData] = useState({})
+    const [data, setData] = useState()
+
+    const formik = useFormik({
+        initialValues: {
+            projectId : id
+        },
+
+        onSubmit: async values => {
+
+            try {
+                if (data) {
+                    axios.put('http://10.1.14.29:81/api/GeneralInfo', formik.values).then(data => console.log(data))
+                }
+                else {
+                    axios.post('http://10.1.14.29:81/api/GeneralInfo', formik.values).then(data => console.log(data))
+                }
+            } catch (err) {
+
+            }
+
+        },
+    })
+
+    const getData = async () => {
+
+        axios.get(`http://10.1.14.29:81/api/GeneralInfo/${id}`).then(data => {
+            const { projectFullname, projectDescription, createdBy, productionDate, userCount } = data.data[0];
+            formik.setValues({
+                ...formik.values,
+                projectFullname,
+                projectDescription,
+                createdBy,
+                productionDate,
+                userCount
+            });
+            setData(data.data[0])
+        }).catch(err => console.log(err))
 
 
-
-    const handleChange = (e) => {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        data.projectid = id
-        // axios.put(`http://10.1.14.29:81/api/GeneralInfo/${id}`, data).then(data=>console.log(data)).catch(err=>console.log(err))
-    }
-
-    const getData = () => {
-        axios.get(`http://10.1.14.29:81/api/GeneralInfo/${id}`).then(data => setPrevData(data.data[0]))
     }
 
     useEffect(() => {
@@ -32,19 +52,21 @@ function GeneralForm({ id }) {
 
     return (
         <>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="prjname">Project Full Name</label>
-                <input id="prjname" type="text" name="projectFullname" onChange={(e) => handleChange(e)} defaultValue={prevData?.projectFullname} />
+                <input id="prjname" type="text" name="projectFullname" onChange={formik.handleChange} value={formik.values.projectFullname} />
                 <label htmlFor="desc">Project Description</label>
-                <input id="desc" type="text" name="projectDescription" onChange={(e) => handleChange(e)} defaultValue={prevData?.projectDescription} />
+                <input id="desc" type="text" name="projectDescription" onChange={formik.handleChange} value={formik.values.projectDescription} />
                 <label htmlFor="create">Created By</label>
-                <input id="create" type="text" name="createdBy" onChange={(e) => handleChange(e)} defaultValue={prevData?.createdBy} />
+                <input id="create" type="text" name="createdBy" onChange={formik.handleChange} value={formik.values.createdBy} />
                 <label htmlFor="date">Production Date</label>
-                <input id="date" type="date" name="productionDate" onChange={(e) => handleChange(e)} defaultValue={prevData?.productionDate} />
+                <input id="date" type="date" name="productionDate" onChange={formik.handleChange} value={formik.values.productionDate}/>
                 <label htmlFor="count">Project User Count</label>
-                <input id="count" type="number" name="userCount" onChange={(e) => handleChange(e)} defaultValue={prevData?.userCount} />
+                <input id="count" type="number" name="userCount" onChange={formik.handleChange} value={formik.values.userCount} />
                 <button className="btn-new" type="submit">Submit</button>
             </form>
+
+
         </>
     )
 }

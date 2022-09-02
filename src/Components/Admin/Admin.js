@@ -6,6 +6,7 @@ import './Admin.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from './Modals/Modal';
 import AddModal from './Modals/AddModal';
+import Loading from '../UI/Loading'
 
 function Admin() {
 
@@ -15,10 +16,21 @@ function Admin() {
     const [edit, setEdit] = useState()
 
     const [searchList, setSearchList] = useState([])
+    const [loading, setLoading] = useState(false)
 
-    const getProjects = useCallback(() => {
-        axios.get(process.env.REACT_APP_PROJECT_URL)
-            .then(data => setList(data.data))
+    const getProjects = useCallback(async() => {
+        try {
+            setLoading(true)
+            const res = axios.get('http://10.1.14.29:81/api/ProjectInfo')
+            setList((await res).data)
+            if((await res).status){
+                setLoading(false)
+            }
+        } catch (error) {
+            setLoading(false)
+            console.log(error)
+        }
+
     }, [])
 
     const search = (input) => {
@@ -30,7 +42,7 @@ function Admin() {
 
     const deleteProject = (id) => {
         console.log(id);
-        axios.delete('http://10.1.14.29:81/api/ProjectInfo/' + `${id}`).then(data => console.log(data))
+        axios.delete(`http://10.1.14.29:81/api/ProjectInfo/${id}`).then(data => console.log(data))
     }
 
     const editProject = (id) => {
@@ -40,6 +52,7 @@ function Admin() {
 
     useEffect(() => {
         getProjects()
+        
     }, [getProjects])
 
 
@@ -47,6 +60,7 @@ function Admin() {
     return (
         <>
             <div className='admin'>
+            {loading && <Loading />}
                 <div className='left'>
                     <div className="left-head">
                         <h2>Proyektler</h2>
@@ -55,18 +69,18 @@ function Admin() {
 
                     <ul className='projectList'>
                         {
-                            searchList.length>0 ?
-                            searchList.map((item, index) => (
-                                <li key={index} > {item?.projectName}
-                                    <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
-                            )):
-                            list.map((item, index) => (
-                                <li key={index} > {item?.projectName}
-                                    <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
-                            ))
+                            searchList.length > 0 ?
+                                searchList.map((item, index) => (
+                                    <li key={index} > {item?.projectName}
+                                        <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
+                                )) :
+                                list.map((item, index) => (
+                                    <li key={index} > {item?.projectName}
+                                        <div><FontAwesomeIcon id={item?.projectId} icon={faEdit} size={'lg'} className="edit" onClick={() => editProject(item?.projectId)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteProject(item?.projectId)} /></div> </li>
+                                ))
                         }
                         {
-                            list.length===0 && <div>Proyekt yoxdur</div>
+                            list.length === 0 && <div>Proyekt yoxdur</div>
                         }
                     </ul>
                 </div>
