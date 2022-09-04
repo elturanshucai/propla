@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import logo from '../../logo_transparent.png'
+import logo from '../../images/logo_transparent.png'
 import "./Login.css"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'

@@ -3,7 +3,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function EditModal({ data, setEdit }) {
+function EditServerLink({ data, setEdit }) {
 
     const [newData, setNewData] = useState(data)
 
@@ -35,4 +35,4 @@ function EditModal({ data, setEdit }) {
     )
 }
 
-export default EditModal
+export default EditServerLink

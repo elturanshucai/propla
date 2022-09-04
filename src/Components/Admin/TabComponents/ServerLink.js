@@ -3,32 +3,38 @@ import React, { useEffect, useState } from "react";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EditModal from "../Modals/EditModal";
+import EditModal from "../Modals/EditServerLink";
 import { useFormik } from "formik";
 
 function ServerLink({ id }) {
 
-    const [prevData, setPrevData] = useState([])
+    const [prevData, setPrevData] = useState([
+        {
+            serverTypeName: 'abc',
+            serverIp: '3243431',
+            serverPort: '545425425'
+        }
+    ])
     const [serverData, setServerData] = useState([])
 
     const [edit, setEdit] = useState(false)
     const [oldData, setOldData] = useState({})
 
-    const formik = useFormik({
-        initialValues: {
-            projectId : id
-        },
+    // const formik = useFormik({
+    //     initialValues: {
+    //         projectId : id
+    //     },
 
-        onSubmit: async values => {
+    //     onSubmit: async values => {
 
-            try {
+    //         try {
                 
-            } catch (err) {
+    //         } catch (err) {
 
-            }
+    //         }
 
-        },
-    })
+    //     },
+    // })
 
     const handleChange = (e) => {
         setServerData({
@@ -49,14 +55,14 @@ function ServerLink({ id }) {
 
     const getData = () => {
         axios.get(`http://10.1.14.29:81/api/ServerLink/${id}`).then(data => {
-            const { serverIp, serverPort, serverTypeName } = data.data[0];
-            formik.setValues({
-                ...formik.values,
-                serverIp,
-                serverPort,
-                serverTypeName
-            });
-            setServerData(data.data[0])
+            // const { serverIp, serverPort, serverTypeName } = data.data[0];
+            // formik.setValues({
+            //     ...formik.values,
+            //     serverIp,
+            //     serverPort,
+            //     serverTypeName
+            // });
+            setPrevData(data.data[0])
         }).catch(err => console.log(err))
     }
 

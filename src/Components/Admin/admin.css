@@ -66,6 +66,19 @@
     justify-content: space-between;
 }
 
+.admin .notProject{
+    margin: 100px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.admin .notProject svg, .notProject h2{
+    width: fit-content;
+    margin: 10px auto;
+}
+
 .admin li div {
     display: flex;
     align-items: center;

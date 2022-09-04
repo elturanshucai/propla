@@ -3,11 +3,17 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import '../Admin.css'
-import EditModal from "../Modals/EditModal";
+import EditModal from "../Modals/EditGitRepo";
 
 function GitRepoLink({ id }) {
 
-    const [prevData, setPrevData] = useState([])
+    const [prevData, setPrevData] = useState([
+        {
+            repoName: 'murad',
+            repoUrl: 'ejrjewjr53',
+            repoDescription: 'dsfsfdsdd'
+        }
+    ])
     const [gitData, setGitData] = useState({})
     const [oldData, setOldData] = useState({})
 
@@ -65,7 +71,7 @@ function GitRepoLink({ id }) {
 
                 <button className="btn-new" type="submit">Submit</button>
             </form>
-            {edit && <EditModal setEdit={setEdit} />}
+            {edit && <EditModal data={oldData} setEdit={setEdit} />}
         </>
     )
 }

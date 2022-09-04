@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import './Admin.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from './Modals/Modal';
@@ -10,7 +11,9 @@ import Loading from '../UI/Loading'
 
 function Admin() {
 
-    const [list, setList] = useState([])
+    const [list, setList] = useState([
+        {projectName: 'elturan'}
+    ])
     const [modal, setModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
     const [edit, setEdit] = useState()
@@ -18,12 +21,12 @@ function Admin() {
     const [searchList, setSearchList] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const getProjects = useCallback(async() => {
+    const getProjects = useCallback(async () => {
         try {
             setLoading(true)
             const res = axios.get('http://10.1.14.29:81/api/ProjectInfo')
             setList((await res).data)
-            if((await res).status){
+            if ((await res).status) {
                 setLoading(false)
             }
         } catch (error) {
@@ -51,8 +54,8 @@ function Admin() {
     }
 
     useEffect(() => {
-        getProjects()
-        
+        // getProjects()
+
     }, [getProjects])
 
 
@@ -60,7 +63,7 @@ function Admin() {
     return (
         <>
             <div className='admin'>
-            {loading && <Loading />}
+                {loading && <Loading />}
                 <div className='left'>
                     <div className="left-head">
                         <h2>Proyektler</h2>
@@ -80,7 +83,11 @@ function Admin() {
                                 ))
                         }
                         {
-                            list.length === 0 && <div>Proyekt yoxdur</div>
+                            list.length === 0 &&
+                            <div className='notProject'>
+                                <FontAwesomeIcon color='#09347a' size='4x' icon={faCircleInfo} />
+                                <h2>Proyekt yoxdur</h2>
+                            </div>
                         }
                     </ul>
                 </div>

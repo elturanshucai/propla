@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import "./Header.css"
-import img from '../../logo_transparent.png'
+import img from '../../images/logo_transparent.png'
 import { fnLogout } from "../../Store/reducers/projectReducer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faNavicon, faClose } from "@fortawesome/free-solid-svg-icons";
