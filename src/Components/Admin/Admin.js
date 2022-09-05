@@ -11,9 +11,7 @@ import Loading from '../UI/Loading'
 
 function Admin() {
 
-    const [list, setList] = useState([
-        {projectName: 'elturan'}
-    ])
+    const [list, setList] = useState([])
     const [modal, setModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
     const [edit, setEdit] = useState()
@@ -44,8 +42,13 @@ function Admin() {
 
 
     const deleteProject = (id) => {
-        console.log(id);
-        axios.delete(`http://10.1.14.29:81/api/ProjectInfo/${id}`).then(data => console.log(data))
+        axios.delete(`http://10.1.14.29:81/api/ProjectInfo/${id}`)
+            .then(data => {
+                if (data.status === 200) {
+                    getProjects()
+                }
+            })
+            .catch(err => console.log(err))
     }
 
     const editProject = (id) => {
@@ -54,8 +57,7 @@ function Admin() {
     }
 
     useEffect(() => {
-        // getProjects()
-
+        getProjects()
     }, [getProjects])
 
 
@@ -95,7 +97,7 @@ function Admin() {
                     <button className='btn-new' onClick={() => setAddModal(true)}> Yeni Proyekt <FontAwesomeIcon icon={faPlus} /> </button>
                 </div>
                 {modal && <Modal setModal={setModal} id={edit} />}
-                {addModal && <AddModal closeModal={setAddModal} />}
+                {addModal && <AddModal closeModal={setAddModal} getProjects={getProjects} />}
 
             </div>
         </>

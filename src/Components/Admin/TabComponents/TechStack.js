@@ -1,19 +1,15 @@
-import React, { useState } from "react";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from "react";
+import { faClose, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
-function TechStack() {
+function TechStack({ id }) {
 
     const [techList, setTechList] = useState([])
     const [techName, setTechName] = useState('')
-    const [prevData, setPrevData] = useState([
-        {programName: 'html'},
-        {programName: 'css'},
-        {programName: 'js'},
-        {programName: 'react'}
-    ])
+    const [prevData, setPrevData] = useState([])
 
     const addTech = (e) => {
         if (e.keyCode === 13) {
@@ -32,9 +28,24 @@ function TechStack() {
     }
 
     const submitTech = () => {
-        let data = techList.toString(' ,')
-        console.log(data);
+        // axios.post(`http://10.1.14.29:81/api/TechStack/`, {
+        //     projectId: id,
+        //     programName: `${techList.toString(' ,')}`
+        // })
+        //     .then(res => console.log(res))
+        console.log({
+            projectId: id,
+            programName: techList.toString(' ,')
+        });
     }
+
+    const getTech = () => {
+        axios.get(`http://10.1.14.29:81/api/TechStack/${id}`).then(data => console.log(data))
+    }
+
+    useEffect(() => {
+        getTech()
+    }, [])
 
     return (
         <>
@@ -42,8 +53,12 @@ function TechStack() {
                 <label htmlFor="techName">Tech Name</label>
 
                 <div className="techList">
-                    {prevData.map(item=>(
-                        <div className="techItem">{item.programName}</div>
+                    {prevData.map(item => (
+                        <div className="techItem">
+                            {item.programName}
+                            <FontAwesomeIcon icon={faEdit} />
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                        </div>
                     ))}
                 </div>
 

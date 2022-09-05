@@ -1,45 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditModal from "../Modals/EditServerLink";
-import { useFormik } from "formik";
 
 function ServerLink({ id }) {
 
-    const [prevData, setPrevData] = useState([
-        {
-            serverTypeName: 'abc',
-            serverIp: '3243431',
-            serverPort: '545425425'
-        }
-    ])
+    const [prevData, setPrevData] = useState([])
     const [serverData, setServerData] = useState([])
 
     const [edit, setEdit] = useState(false)
     const [oldData, setOldData] = useState({})
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //         projectId : id
-    //     },
-
-    //     onSubmit: async values => {
-
-    //         try {
-                
-    //         } catch (err) {
-
-    //         }
-
-    //     },
-    // })
-
     const handleChange = (e) => {
         setServerData({
             ...serverData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            projectId: id
         })
     }
 
@@ -48,21 +26,19 @@ function ServerLink({ id }) {
         setOldData(data)
     }
 
-    const handleSubmit = (e) => {
+    const deleteLink = (linkId) => {
+        axios.delete(`http://10.1.14.29:81/api/ServerLink/${linkId}`).catch(err => console.log(err))
+    }
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(serverData);
+        axios.post(`http://10.1.14.29:81/api/ServerLink`, serverData).catch(err => console.log(err))
+        await getData()
     }
 
     const getData = () => {
         axios.get(`http://10.1.14.29:81/api/ServerLink/${id}`).then(data => {
-            // const { serverIp, serverPort, serverTypeName } = data.data[0];
-            // formik.setValues({
-            //     ...formik.values,
-            //     serverIp,
-            //     serverPort,
-            //     serverTypeName
-            // });
-            setPrevData(data.data[0])
+            setPrevData(data.data)
         }).catch(err => console.log(err))
     }
 
@@ -85,15 +61,18 @@ function ServerLink({ id }) {
                             <div>{item?.serverIp} </div>
                             <div>{item?.serverPort} </div>
                             <div>{item?.serverTypeName} </div>
-                            <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
+                            <div className="icons">
+                                <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
+                                <FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteLink(item.serverlinkId)} />
+                            </div>
                         </div>
                     ))}
                 </div>
 
                 <div className="inputs">
-                    <input id="ip" onChange={(e) => handleChange(e)} name="ip" />
-                    <input id="port" onChange={(e) => handleChange(e)} name="port" />
-                    <input id="type" onChange={(e) => handleChange(e)} name="type" />
+                    <input id="ip" onChange={(e) => handleChange(e)} name="serverIp" />
+                    <input id="port" onChange={(e) => handleChange(e)} name="serverPort" />
+                    <input id="type" onChange={(e) => handleChange(e)} name="serverTypeName" />
                 </div>
 
                 <button className="btn-new" type="submit">Submit</button>

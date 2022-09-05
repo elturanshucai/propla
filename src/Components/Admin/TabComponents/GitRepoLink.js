@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import '../Admin.css'
@@ -7,13 +7,7 @@ import EditModal from "../Modals/EditGitRepo";
 
 function GitRepoLink({ id }) {
 
-    const [prevData, setPrevData] = useState([
-        {
-            repoName: 'murad',
-            repoUrl: 'ejrjewjr53',
-            repoDescription: 'dsfsfdsdd'
-        }
-    ])
+    const [prevData, setPrevData] = useState([])
     const [gitData, setGitData] = useState({})
     const [oldData, setOldData] = useState({})
 
@@ -22,7 +16,8 @@ function GitRepoLink({ id }) {
     const handleChange = (e) => {
         setGitData({
             ...gitData,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            projectId: id
         })
     }
 
@@ -39,10 +34,13 @@ function GitRepoLink({ id }) {
         getData()
     }, [])
 
-
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(gitData);
+        axios.post(`http://10.1.14.29:81/api/GitRepoLink`, gitData).then(res => console.log(res))
+    }
+
+    const deleteLink = (linkId) => {
+        axios.delete(`http://10.1.14.29:81/api/GitRepoLink/${linkId}`).catch(err => console.log(err))
     }
 
     return (
@@ -54,19 +52,23 @@ function GitRepoLink({ id }) {
                     <label htmlFor="desc">Repo Description</label>
                 </div>
                 <div className="prevLinks">
-                    {prevData.map(item => (
+                    {prevData.length > 0 && prevData.map(item => (
                         <div className="prev-item" key={item?.gitRepolinkId} >
                             <div>{item?.repoName} </div>
                             <div>{item?.repoUrl} </div>
                             <div>{item?.repoDescription} </div>
-                            <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
+                            <div className="icons">
+                                <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
+                                <FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteLink(item.gitRepolinkId)} />
+                            </div>
+                            
                         </div>
                     ))}
                 </div>
                 <div className="inputs">
-                    <input id="name" onChange={(e) => handleChange(e)} name="name" />
-                    <input id="url" onChange={(e) => handleChange(e)} name="url" />
-                    <input id="desc" onChange={(e) => handleChange(e)} name="desc" />
+                    <input id="name" onChange={(e) => handleChange(e)} name="repoName" />
+                    <input id="url" onChange={(e) => handleChange(e)} name="repoUrl" />
+                    <input id="desc" onChange={(e) => handleChange(e)} name="repoDescription" />
                 </div>
 
                 <button className="btn-new" type="submit">Submit</button>

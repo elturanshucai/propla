@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,6 +10,7 @@ function EditServerLink({ data, setEdit }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // axios.put(`http://10.1.14.29:81/api/ServerLink`, newData).then(res => console.log(res))
         console.log(newData);
     }
 
@@ -21,9 +23,9 @@ function EditServerLink({ data, setEdit }) {
 
     return (
         <div className="edit-div">
+            
             <form onSubmit={(e) => handleSubmit(e)}>
-                <FontAwesomeIcon icon={faClose} onClick={() => setEdit(false)} size={'2x'} />
-                <label htmlFor="ip">Server IP</label>
+                <label htmlFor="ip">Server IP <FontAwesomeIcon icon={faClose} onClick={() => setEdit(false)} size={'2x'} /></label>
                 <input id="ip" name="serverIp" defaultValue={data?.serverIp} onChange={(e) => handleChange(e)} />
                 <label htmlFor="port">Server Port</label>
                 <input id="port" name="serverPort" defaultValue={data?.serverPort} onChange={(e) => handleChange(e)} />
@@ -31,6 +33,7 @@ function EditServerLink({ data, setEdit }) {
                 <input id="type" name="serverTypeName" defaultValue={data?.serverTypeName} onChange={(e) => handleChange(e)} />
                 <button className="btn-new" type="submit" >Change</button>
             </form>
+            
         </div>
     )
 }

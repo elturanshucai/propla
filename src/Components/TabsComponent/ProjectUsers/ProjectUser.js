@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './Project.css'
 
-function ProjectUser(){
+function ProjectUser() {
 
     const [users, setUsers] = useState([])
 
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get('http://10.1.14.29:81/api/GitRepoLink' + `/${id}`).then(data => setUsers(data.data))
-
+        axios.get(`http://10.1.14.29:81/api/User/${id}`).then(data => setUsers(data.data))
     }, [])
+    console.log(users);
 
     return (
         <>
@@ -29,26 +29,18 @@ function ProjectUser(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Elturan</td>
-                        <td>Shucai</td>
-                        <td>elturanfcb@gmail.com</td>
-                        <td>1313</td>
-                        <td>070-712-06-12</td>
-                        <td>Front End</td>
-                        <td>Bilmirem</td>
-                        <td>Aciqlama yoxdur</td>
-                    </tr>
-                    <tr>
-                        <td>Elturan</td>
-                        <td>Shucai</td>
-                        <td>elturanfcb@gmail.com</td>
-                        <td>1313</td>
-                        <td>070-712-06-12</td>
-                        <td>Front End</td>
-                        <td>Bilmirem</td>
-                        <td>Aciqlama yoxdurAciqlama yoxdurAciqlama yoxdur</td>
-                    </tr>
+                    {users.map(user => (
+                        <tr>
+                            <td>{user?.name}</td>
+                            <td>{user?.surname}</td>
+                            <td>{user?.mail}</td>
+                            <td>{user?.officeNumber}</td>
+                            <td>{user?.personalNumber}</td>
+                            <td>{user?.positionName}</td>
+                            <td>Bilmirem</td>
+                            <td>Aciqlama yoxdur</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </>
