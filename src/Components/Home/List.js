@@ -39,7 +39,7 @@ function List() {
         if (localStorage.page) {
             setCurrentPage(parseInt(localStorage.getItem('page')))
         }
-        getProjects()
+        // getProjects()
 
     }, [getProjects])
 

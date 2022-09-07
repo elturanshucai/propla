@@ -1,4 +1,4 @@
-import { faCircleInfo, faClose, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCircleInfo, faClose, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -8,7 +8,14 @@ import EditUser from "./Modals/EditUser";
 
 function Users({ display }) {
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([
+        {
+            id: '1',
+            name: 'Elturan',
+            surname: 'Sucai',
+            mail: 'fcb@gmal.com'
+        }
+    ])
     const [searchList, setSearchList] = useState([])
     const [modal, setModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
@@ -42,17 +49,18 @@ function Users({ display }) {
     }
 
     useEffect(() => {
-        getUsers()
+        // getUsers()
     }, [])
 
     return (
         <>{modal && <AddModalUser setModal={setModal} getData={getUsers} />}
-        {editModal && <EditUser setModal={setEditModal} data={editData} id={editId} getData={getUsers} />}
+            {editModal && <EditUser setModal={setEditModal} data={editData} id={editId} getData={getUsers} />}
             <div className="modal users">
                 <div className="left-head user-head">
+                    <FontAwesomeIcon icon={faArrowLeft} size='lg' onClick={() => display(false)} />
+
                     <h2>Istifadeciler</h2>
                     <input type="text" placeholder="Search.." onChange={(e) => search(e.target.value)} />
-                    <FontAwesomeIcon icon={faClose} size='2x' onClick={() => display(false)} />
                     <button className="btn-new" onClick={() => setModal(true)}>Yeni Istifadeci</button>
                 </div>
                 <ul className='projectList'>
@@ -73,13 +81,13 @@ function Users({ display }) {
                                     <div><FontAwesomeIcon id={item?.userId} icon={faEdit} size={'lg'} className="edit" onClick={() => editUser(item?.userId, item)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteUser(item?.userId)} /></div> </li>
                             ))
                     }
-                    {
+                    {/* {
                         users.length === 0 &&
                         <div className='notProject'>
                             <FontAwesomeIcon color='#09347a' size='4x' icon={faCircleInfo} />
                             <h2>Proyekt yoxdur</h2>
                         </div>
-                    }
+                    } */}
                 </ul>
             </div>
         </>

@@ -59,7 +59,7 @@ function Admin() {
     }
 
     useEffect(() => {
-        getProjects()
+        // getProjects()
     }, [getProjects])
 
 
