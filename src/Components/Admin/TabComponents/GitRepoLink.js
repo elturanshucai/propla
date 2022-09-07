@@ -36,11 +36,19 @@ function GitRepoLink({ id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(`http://10.1.14.29:81/api/GitRepoLink`, gitData).then(res => console.log(res))
+        axios.post(`http://10.1.14.29:81/api/GitRepoLink`, gitData).then(data => {
+            if (data.status === 200) {
+                getData()
+            }
+        }).catch(err => console.log(err))
     }
 
     const deleteLink = (linkId) => {
-        axios.delete(`http://10.1.14.29:81/api/GitRepoLink/${linkId}`).catch(err => console.log(err))
+        axios.delete(`http://10.1.14.29:81/api/GitRepoLink/${linkId}`).then(data => {
+            if (data.status === 200) {
+                getData()
+            }
+        }).catch(err => console.log(err))
     }
 
     return (
@@ -61,7 +69,7 @@ function GitRepoLink({ id }) {
                                 <FontAwesomeIcon icon={faEdit} onClick={() => editLink(item)} />
                                 <FontAwesomeIcon icon={faTrashAlt} onClick={() => deleteLink(item.gitRepolinkId)} />
                             </div>
-                            
+
                         </div>
                     ))}
                 </div>
@@ -73,7 +81,7 @@ function GitRepoLink({ id }) {
 
                 <button className="btn-new" type="submit">Submit</button>
             </form>
-            {edit && <EditModal data={oldData} setEdit={setEdit} />}
+            {edit && <EditModal data={oldData} setEdit={setEdit} getData={getData} />}
         </>
     )
 }

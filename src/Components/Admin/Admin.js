@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import axios from 'axios'
-import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleRight, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import './Admin.css'
@@ -8,12 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Modal from './Modals/Modal';
 import AddModal from './Modals/AddModal';
 import Loading from '../UI/Loading'
+import Users from './Users';
 
 function Admin() {
 
     const [list, setList] = useState([])
     const [modal, setModal] = useState(false)
     const [addModal, setAddModal] = useState(false)
+    const [userComp, setUserComp] = useState(false)
     const [edit, setEdit] = useState()
 
     const [searchList, setSearchList] = useState([])
@@ -36,7 +38,7 @@ function Admin() {
 
     const search = (input) => {
         let newList = []
-        newList = list.filter(item => item.projectName.toLowerCase().includes(input))
+        newList = list.filter(item => item.projectName.toLowerCase().includes(input.toLowerCase()))
         setSearchList(newList)
     }
 
@@ -95,11 +97,12 @@ function Admin() {
                 </div>
                 <div className='panel'>
                     <button className='btn-new' onClick={() => setAddModal(true)}> Yeni Proyekt <FontAwesomeIcon icon={faPlus} /> </button>
+                    <button className='btn-new' onClick={() => setUserComp(true)}> Istifadeciler <FontAwesomeIcon icon={faArrowCircleRight} /> </button>
                 </div>
                 {modal && <Modal setModal={setModal} id={edit} />}
                 {addModal && <AddModal closeModal={setAddModal} getProjects={getProjects} />}
-
-            </div>
+                {userComp && <Users display={setUserComp}/>}
+            </div>  
         </>
     )
 }

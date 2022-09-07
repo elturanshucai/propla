@@ -4,14 +4,18 @@ import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
-function EditGitRepo({ data, setEdit }) {
+function EditGitRepo({ data, setEdit, getData }) {
 
     const [newData, setNewData] = useState(data)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(newData);
-        axios.put(`http://10.1.14.29:81/api/GitRepoLink`, newData).then(res => console.log(res))
+        axios.put(`http://10.1.14.29:81/api/GitRepoLink`, newData).then(data => {
+            if (data.status === 200) {
+                setEdit(false)
+                getData()
+            }
+        }).catch(err => console.log(err))
     }
 
     const handleChange = (e) => {

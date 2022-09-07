@@ -8,7 +8,11 @@ import EditModal from "../Modals/EditServerLink";
 function ServerLink({ id }) {
 
     const [prevData, setPrevData] = useState([])
-    const [serverData, setServerData] = useState([])
+    const [serverData, setServerData] = useState([{
+        serverIp: '',
+        serverPort: '',
+        serverTypeName: ''
+    }])
 
     const [edit, setEdit] = useState(false)
     const [oldData, setOldData] = useState({})
@@ -27,13 +31,21 @@ function ServerLink({ id }) {
     }
 
     const deleteLink = (linkId) => {
-        axios.delete(`http://10.1.14.29:81/api/ServerLink/${linkId}`).catch(err => console.log(err))
+        axios.delete(`http://10.1.14.29:81/api/ServerLink/${linkId}`).then(data => {
+            if (data.status === 200) {
+                getData()
+            }
+        }).catch(err => console.log(err))
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        axios.post(`http://10.1.14.29:81/api/ServerLink`, serverData).catch(err => console.log(err))
-        await getData()
+        axios.post(`http://10.1.14.29:81/api/ServerLink`, serverData).then(data => {
+            if (data.status === 200) {
+                getData()
+            }
+        }).catch(err => console.log(err))
+
     }
 
     const getData = () => {
@@ -78,7 +90,7 @@ function ServerLink({ id }) {
                 <button className="btn-new" type="submit">Submit</button>
             </form>
 
-            {edit && <EditModal data={oldData} setEdit={setEdit} />}
+            {edit && <EditModal data={oldData} setEdit={setEdit} getData={getData} />}
 
         </>
     )

@@ -25,7 +25,7 @@
     overflow: auto;
 }
 
-.admin .left .left-head{
+.admin .left .left-head {
     border-bottom: 1px solid rgb(218, 218, 218);
     margin-bottom: 20px;
     display: flex;
@@ -33,7 +33,27 @@
     padding: 10px 20px;
 }
 
-.admin .left-head input{
+.admin .user-head {
+    color: black;
+    margin: 20px auto;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+}
+
+.admin .user-head svg {
+    position: absolute;
+    right: -100px;
+    cursor: pointer;
+}
+
+.admin .user-head input {
+    height: 30px;
+}
+
+.admin .left-head input {
     outline: none;
     padding: 0 10px;
     border-radius: 5px;
@@ -51,6 +71,69 @@
     list-style: none;
     justify-content: center;
     gap: 20px;
+}
+
+.admin .users {
+    background-color: rgba(253, 253, 253, 1);
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.admin .users li {
+    background-color: #caccd1;
+    width: 50%;
+}
+
+.users .user-head button {
+    position: absolute;
+    right: -150px;
+    height: 40px;
+    font-size: 16px;
+    width: 120px;
+    top: 50px;
+
+}
+
+.admin .usermodal {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    color: #caccd1;
+}
+
+.admin .usermodal svg {
+    position: absolute;
+    right: 60px;
+    top: 40px;
+    cursor: pointer;
+}
+
+.admin .usermodal form {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: 50px auto;
+}
+
+.admin .usermodal input {
+    margin: 5px 0 15px;
+    height: 30px;
+    padding: 0 8px;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.admin .usermodal button {
+    margin: 10px auto;
+    height: 40px;
+    font-size: 16px;
 }
 
 .admin li {
@@ -91,6 +174,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 50px;
 }
 
 .btn-new {
@@ -164,8 +248,7 @@
 }
 
 .modal .content form.link {
-    width: 50%;
-    overflow: auto;
+    width: 80%;
 }
 
 .modal .content form.link .prevLinks {
@@ -184,19 +267,29 @@
     align-items: center;
 }
 
-.modal form.link .prev-item .icons{
+.modal form.link .prev-item div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    height: fit-content;
+    overflow-wrap: normal;
+}
+
+.modal form.link .prev-item .icons {
     width: fit-content;
     position: absolute;
-    right: 10px;
+    right: -60px;
     display: flex;
+    color: white;
     gap: 10px;
 }
 
-.modal form.link .prev-item .icons svg:hover{
+.modal form.link .prev-item .icons svg:hover {
     cursor: pointer;
 }
 
-.modal form.link .prev-item div{
+.modal form.link .prev-item div {
     display: flex;
     text-align: center;
     justify-content: center;
@@ -280,13 +373,18 @@
     column-gap: 5px;
     color: black;
     max-width: 350px;
+    margin: 10px 0;
 }
 
 .modal .tech .techItem {
-    padding: 5px 8px;
+    padding: 8px 10px;
     border: none;
     border-radius: 3px;
     background-color: #caccd1;
+}
+
+.modal .tech .techItem svg {
+    margin: 0 4px;
 }
 
 .modal .tech .techItem svg:hover {
@@ -320,7 +418,7 @@
     background-color: #279b37;
 }
 
-.modal .edit-div{
+.modal .edit-div {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -332,22 +430,58 @@
     align-items: center;
 }
 
-.modal .edit-div form{
+.modal .edit-div form {
     width: 25%;
 }
 
-.modal .edit-div label{
+.modal .edit-div label {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.modal .edit-div svg{
+.modal .edit-div svg {
     margin-right: 10px;
     cursor: pointer;
 }
 
-.modal .edit-div input{
+.modal .edit-div input {
     border-radius: 2px;
     border: none;
+}
+
+.editProject {
+    width: 40%;
+    background-color: #caccd1;
+    margin: 40px auto;
+    color: #09347a;
+    border-radius: 2px;
+    font-weight: 500;
+}
+
+.editProjectInner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editProject div {
+    padding: 10px 15px;
+}
+
+.editProject .icons {
+    display: flex;
+    gap: 10px;
+}
+
+.editProject svg {
+    cursor: pointer;
+}
+
+.projectUserModal {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: #c4dff6;
+    top: 0;
+    z-index: 3;
 }
