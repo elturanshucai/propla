@@ -1,35 +1,42 @@
-.general-info{
+.general-info {
     width: 100%;
     display: flex;
 }
-table{
+
+table {
     font-size: 16px;
 }
-.general-info thead{
+
+.general-info thead {
     width: 30%;
 }
-.general-info thead tr{
+
+.general-info thead tr {
     display: flex;
     flex-direction: column;
     font-weight: 500;
     background-color: #203143;
     color: antiquewhite;
 }
-.general-info thead td{
+
+.general-info thead td {
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.general-info tbody{
+
+.general-info tbody {
     background-color: #f2f7f9;
     width: 70%;
 }
-.general-info tbody tr{
+
+.general-info tbody tr {
     display: flex;
     flex-direction: column;
 }
-.general-info tbody td{
+
+.general-info tbody td {
     height: 50px;
     display: flex;
     align-items: center;
@@ -38,17 +45,17 @@ table{
 
 
 @media screen and (max-width: 1000px) {
-    
-    table thead td{
-        font-size: 14px;
-    }
-    
-    table tbody{
+
+    table thead td {
         font-size: 14px;
     }
 
-    .general-info tbody tr{
+    table tbody {
+        font-size: 14px;
+    }
+
+    .general-info tbody tr {
         padding: 25px 20px;
     }
-    
+
 }

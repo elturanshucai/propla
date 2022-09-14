@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function EditGitRepo({ data, setEdit, getData }) {
 
@@ -10,8 +9,11 @@ function EditGitRepo({ data, setEdit, getData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.put(`http://10.1.14.29:81/api/GitRepoLink`, newData).then(data => {
+        axios.put(process.env.REACT_APP_GITREPOLINK_API, newData).then(data => {
             if (data.status === 200) {
+                toast.info('Məlumatlar dəyişdirildi', {
+                    theme: "colored"
+                })
                 setEdit(false)
                 getData()
             }
@@ -26,15 +28,22 @@ function EditGitRepo({ data, setEdit, getData }) {
     }
 
     return (
-        <div className="edit-div">
+        <div className="edit-div-modal">
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label htmlFor="ip">Repo Name <FontAwesomeIcon icon={faClose} onClick={() => setEdit(false)} size={'2x'} /></label>
+                <h2>Edit Git Repo Link</h2>
+                <label htmlFor="ip">Repo Name</label>
                 <input id="ip" name="repoName" defaultValue={data?.repoName} onChange={(e) => handleChange(e)} />
                 <label htmlFor="port">Repo URL</label>
                 <input id="port" name="repoUrl" defaultValue={data?.repoUrl} onChange={(e) => handleChange(e)} />
                 <label htmlFor="type">Repo Description</label>
                 <input id="type" name="repoDescription" defaultValue={data?.repoDescription} onChange={(e) => handleChange(e)} />
-                <button className="btn-new" type="submit" >Change</button>
+                <div className="form-foot">
+                    <div>
+                        <button className="btn-new" type="submit" >Change</button>
+                        <button className="close-btn" type="button" onClick={() => setEdit(false)}>Cancel</button>
+                    </div>
+                </div>
+
             </form>
         </div>
     )

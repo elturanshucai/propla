@@ -9,7 +9,7 @@ function ServerLink() {
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get('http://10.1.14.29:81/api/ServerLink' + `/${id}`).then(data => setServerLink(data.data))
+        axios.get(process.env.REACT_APP_SERVERLINK_API + id).then(data => setServerLink(data.data))
 
     }, [])
 

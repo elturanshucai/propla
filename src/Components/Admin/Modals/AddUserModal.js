@@ -4,6 +4,8 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddModalUser({ setModal, getData }) {
 
@@ -12,18 +14,27 @@ function AddModalUser({ setModal, getData }) {
             name: '',
             surname: '',
             mail: '',
-            officeNumber: '',
+            officeNumber: 0,
             personalNumber: '',
             positionName: '',
+            password: '',
             role: ''
         },
         onSubmit: async values => {
-            axios.post(`http://10.1.14.29:81/api/User`, values ).then(data => {
+            axios.post(process.env.REACT_APP_USER_API, values).then(data => {
                 if (data.status === 200) {
-                    setModal(false)
+                    toast.success('İstifadəçi əlavə olundu', {
+                        theme: "colored"
+                    })
                     getData()
+                    setModal(false)
                 }
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                toast.error('Xəta baş verdi', {
+                    theme: 'colored'
+                })
+                console.log(err)
+            })
         }
     })
 
@@ -73,7 +84,7 @@ function AddModalUser({ setModal, getData }) {
                     />
                     <label htmlFor="officeNumber">Office Number</label>
                     <input
-                        type='text'
+                        type='number'
                         value={formik.values.officeNumber}
                         id='officeNumber'
                         onChange={formik.handleChange}
@@ -91,6 +102,15 @@ function AddModalUser({ setModal, getData }) {
                         value={formik.values.positionName}
                         id='positionName'
                         onChange={formik.handleChange}
+                        required
+                    />
+                    <label htmlFor="password">User Password</label>
+                    <input
+                        type='text'
+                        value={formik.values.password}  
+                        id='password'
+                        onChange={formik.handleChange}
+                        required
                     />
                     <label htmlFor="role">Role</label>
                     <input

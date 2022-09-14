@@ -20,13 +20,13 @@ function List() {
     const [postsPerPage] = useState(9)
     const [loading, setLoading] = useState(false)
 
-    const getProjects = useCallback(async() => {
+    const getProjects = useCallback(async () => {
 
         try {
             setLoading(true)
-            const res = axios.get('http://10.1.14.29:81/api/ProjectInfo')
+            const res = axios.get(process.env.REACT_APP_PROJECTINFO_API)
             setList((await res).data)
-            if((await res).status){
+            if ((await res).status) {
                 setLoading(false)
             }
         } catch (err) {
@@ -39,7 +39,7 @@ function List() {
         if (localStorage.page) {
             setCurrentPage(parseInt(localStorage.getItem('page')))
         }
-        // getProjects()
+        getProjects()
 
     }, [getProjects])
 
@@ -78,11 +78,11 @@ function List() {
 
     const handleClick = useCallback((e) => {
         navigate(`/project/${e.target.id}`)
-    }, [])
+    }, [navigate])
 
     return (
         <>
-            {loading && <Loading/>}
+            {loading && <Loading />}
             <Header />
 
             <div className="main">
@@ -108,7 +108,8 @@ function List() {
                     }
 
                 </div>
-                <Pagination postsPerPage={postsPerPage} totalPosts={list.length} paginate={paginate} />
+                {newList.length === 0 && <Pagination postsPerPage={postsPerPage} totalPosts={list.length} paginate={paginate} />}
+                
 
             </div>
 

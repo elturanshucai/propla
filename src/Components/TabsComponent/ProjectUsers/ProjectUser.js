@@ -9,9 +9,8 @@ function ProjectUser() {
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get(`http://10.1.14.29:81/api/User/${id}`).then(data => setUsers(data.data))
+        axios.get(process.env.REACT_APP_PROJECTPOSITION_API + id).then(data => setUsers(data.data))
     }, [])
-    console.log(users);
 
     return (
         <>
@@ -29,16 +28,16 @@ function ProjectUser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
-                        <tr>
-                            <td>{user?.name}</td>
-                            <td>{user?.surname}</td>
-                            <td>{user?.mail}</td>
-                            <td>{user?.officeNumber}</td>
-                            <td>{user?.personalNumber}</td>
-                            <td>{user?.positionName}</td>
-                            <td>Bilmirem</td>
-                            <td>Aciqlama yoxdur</td>
+                    {users.map((user, index) => (
+                        <tr key={index}>
+                            <td>{user?.user?.name}</td>
+                            <td>{user?.user?.surname}</td>
+                            <td>{user?.user?.mail}</td>
+                            <td>{user?.user?.officeNumber}</td>
+                            <td>{user?.user?.personalNumber}</td>
+                            <td>{user?.user?.positionName}</td>
+                            <td>{user?.devtypename}</td>
+                            <td>{user?.projectUserDescription}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { faClose, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import '../Admin.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import EditTech from "../Modals/EditTech";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function TechStack({ id }) {
 
@@ -15,7 +17,7 @@ function TechStack({ id }) {
     const [editData, setEditData] = useState()
 
     const addTech = (e) => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && e.target.value.trim() !== '') {
             setTechList([
                 ...techList,
                 techName
@@ -36,34 +38,44 @@ function TechStack({ id }) {
     }
 
     const deleteTech = (itemId) => {
-        axios.delete(`http://10.1.14.29:81/api/TechStack/${itemId}`).then(data => {
+        axios.delete(process.env.REACT_APP_TECHSTACK_API + itemId).then(data => {
             if (data.status === 200) {
+                toast.info('Uğurla silindi')
                 getTech()
             }
-        }).catch(err => console.log(err))
+        }).catch(err => {
+            toast.error('Xəta baş verdi')
+            console.log(err)
+        })
     }
 
     const submitTech = () => {
-        axios.post(`http://10.1.14.29:81/api/TechStack/`, {
-            projectId: id,
-            programName: `${techList.toString(' ,')}`
-        })
-            .then(data => {
-                if (data.status === 200) {
-                    setTechList([])
-                    getTech()
-                }
+        if (techList.length > 0) {
+            axios.post(process.env.REACT_APP_TECHSTACK_API, {
+                projectId: id,
+                programName: `${techList.toString(' ,')}`
             })
-            .catch(err => console.log(err))
+                .then(data => {
+                    if (data.status === 200) {
+                        toast.success('Uğurla əlavə edildi');
+                        setTechList([])
+                        getTech()
+                    }
+                })
+                .catch(err => {
+                    toast.error('Xəta baş verdi')
+                    console.log(err)
+                })
+        }
     }
 
-    const getTech = () => {
-        axios.get(`http://10.1.14.29:81/api/TechStack/${id}`).then(data => setPrevData(data.data))
-    }
+    const getTech = useCallback(() => {
+        axios.get(process.env.REACT_APP_TECHSTACK_API + id).then(data => setPrevData(data.data))
+    }, [id])
 
     useEffect(() => {
         getTech()
-    }, [])
+    }, [getTech])
 
     return (
         <>

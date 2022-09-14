@@ -8,8 +8,7 @@ function GitRepoLink() {
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get('http://10.1.14.29:81/api/GitRepoLink' + `/${id}`).then(data => setGitLink(data.data))
-
+        axios.get(process.env.REACT_APP_GITREPOLINK_API + id).then(data => setGitLink(data.data))
     }, [])
 
 

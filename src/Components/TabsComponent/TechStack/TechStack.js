@@ -9,7 +9,7 @@ function TechStack() {
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get('http://10.1.14.29:81/api/TechStack' + `/${id}`).then(data => setTech(data.data))
+        axios.get(process.env.REACT_APP_TECHSTACK_API + id).then(data => setTech(data.data))
     }, [])
 
     return (

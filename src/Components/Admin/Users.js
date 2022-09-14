@@ -1,21 +1,16 @@
-import { faArrowLeft, faCircleInfo, faClose, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCircleInfo, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import './Admin.css'
 import AddModalUser from "./Modals/AddUserModal";
 import EditUser from "./Modals/EditUser";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Users({ display }) {
 
-    const [users, setUsers] = useState([
-        {
-            id: '1',
-            name: 'Elturan',
-            surname: 'Sucai',
-            mail: 'fcb@gmal.com'
-        }
-    ])
+    const [users, setUsers] = useState([])
     const [searchList, setSearchList] = useState([])
     const [modal, setModal] = useState(false)
     const [editModal, setEditModal] = useState(false)
@@ -23,7 +18,7 @@ function Users({ display }) {
     const [editData, setEditData] = useState()
 
     const getUsers = () => {
-        axios.get(`http://10.1.14.29:81/api/User`).then(data => setUsers(data.data)).catch(err => console.log(err))
+        axios.get(process.env.REACT_APP_USER_API).then(data => setUsers(data.data)).catch(err => console.log(err))
     }
 
     const search = (input) => {
@@ -33,13 +28,21 @@ function Users({ display }) {
     }
 
     const deleteUser = (id) => {
-        axios.delete(`http://10.1.14.29:81/api/User/${id}`)
+        axios.delete(process.env.REACT_APP_USER_API + id)
             .then(data => {
                 if (data.status === 200) {
+                    toast.info('İstifadəçi silindi', {
+                        theme: "colored"
+                    })
                     getUsers()
                 }
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                toast.error('Xəta baş verdi', {
+                    theme: 'colored'
+                })
+                console.log(err)
+            })
     }
 
     const editUser = (id, data) => {
@@ -49,7 +52,7 @@ function Users({ display }) {
     }
 
     useEffect(() => {
-        // getUsers()
+        getUsers()
     }, [])
 
     return (
@@ -57,11 +60,10 @@ function Users({ display }) {
             {editModal && <EditUser setModal={setEditModal} data={editData} id={editId} getData={getUsers} />}
             <div className="modal users">
                 <div className="left-head user-head">
-                    <FontAwesomeIcon icon={faArrowLeft} size='lg' onClick={() => display(false)} />
-
-                    <h2>Istifadeciler</h2>
+                    <div onClick={() => display(false)}><FontAwesomeIcon icon={faArrowLeft} size='lg' /></div>
+                    <h2>İstifadəçilər</h2>
                     <input type="text" placeholder="Search.." onChange={(e) => search(e.target.value)} />
-                    <button className="btn-new" onClick={() => setModal(true)}>Yeni Istifadeci</button>
+                    <button className="btn-new" onClick={() => setModal(true)}>Yeni İstifadəçi</button>
                 </div>
                 <ul className='projectList'>
                     {
@@ -71,23 +73,23 @@ function Users({ display }) {
                                     <div>{item?.name}</div>
                                     <div>{item?.surname}</div>
                                     <div>{item?.mail}</div>
-                                    <div><FontAwesomeIcon id={item?.userId} icon={faEdit} size={'lg'} className="edit" onClick={() => editUser(item?.userId, item)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteUser(item?.userId)} /></div> </li>
+                                    <div className='edit-delete'><FontAwesomeIcon id={item?.userId} icon={faEdit} size={'lg'} className="edit" onClick={() => editUser(item?.userId, item)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteUser(item?.userId)} /></div> </li>
                             )) :
                             users.map((item, index) => (
                                 <li key={index} >
                                     <div>{item?.name}</div>
                                     <div>{item?.surname}</div>
                                     <div>{item?.mail}</div>
-                                    <div><FontAwesomeIcon id={item?.userId} icon={faEdit} size={'lg'} className="edit" onClick={() => editUser(item?.userId, item)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteUser(item?.userId)} /></div> </li>
+                                    <div className='edit-delete'><FontAwesomeIcon id={item?.userId} icon={faEdit} size={'lg'} className="edit" onClick={() => editUser(item?.userId, item)} /> <FontAwesomeIcon icon={faTrash} size={'lg'} onClick={() => deleteUser(item?.userId)} /></div> </li>
                             ))
                     }
-                    {/* {
+                    {
                         users.length === 0 &&
                         <div className='notProject'>
                             <FontAwesomeIcon color='#09347a' size='4x' icon={faCircleInfo} />
-                            <h2>Proyekt yoxdur</h2>
+                            <h2>İstifadəçi yoxdur</h2>
                         </div>
-                    } */}
+                    }
                 </ul>
             </div>
         </>

@@ -1,15 +1,17 @@
-.tech{
+.tech {
     width: 100%;
     font-size: 16px;
 }
-.tech thead tr{
+
+.tech thead tr {
     background-color: #203143;
     color: antiquewhite;
 }
-.tech tbody{
+
+.tech tbody {
     background-color: #f2f7f9;
 }
-.tech td{
+
+.tech td {
     padding: 20px 60px;
 }
-

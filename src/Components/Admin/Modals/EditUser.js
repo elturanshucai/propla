@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 import '../Admin.css'
 
 function EditUser({ getData, setModal, id, data }) {
@@ -15,17 +16,25 @@ function EditUser({ getData, setModal, id, data }) {
             officeNumber: data?.officeNumber,
             personalNumber: data?.personalNumber,
             positionName: data?.positionName,
+            password: '',
             role: data?.role?.roleName,
             userId: id
         },
         onSubmit: async values => {
-            axios.put(`http://10.1.14.29:81/api/User`, values).then(data => {
+            axios.put(process.env.REACT_APP_USER_API, values).then(data => {
                 if (data.status === 200) {
-                    setModal(false)
+                    toast.info('İstifadəçi datası dəyişdirildi', {
+                        theme: "colored"
+                    })
                     getData()
+                    setModal(false)
                 }
-            }).catch(err => console.log(err))
-            console.log(values);
+            }).catch(err => {
+                toast.error('Xəta baş verdi', {
+                    theme: 'colored'
+                })
+                console.log(err)
+            })
         }
     })
 
@@ -92,6 +101,13 @@ function EditUser({ getData, setModal, id, data }) {
                         type='text'
                         value={formik.values.positionName}
                         id='positionName'
+                        onChange={formik.handleChange}
+                    />
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type='text'
+                        value={formik.values.password}
+                        id='password'
                         onChange={formik.handleChange}
                     />
                     <label htmlFor="role">Role</label>

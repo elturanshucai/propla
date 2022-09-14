@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import GeneralInfo from '../TabsComponent/GeneralInfo/GeneralInfo'
 import GitRepoLink from '../TabsComponent/GitRepoLinks/GitRepoLink'
@@ -8,19 +9,30 @@ import TechStack from '../TabsComponent/TechStack/TechStack'
 
 import './Details.css'
 
-function Details(){
-    const [tabId, setTabId]=useState("info")
-    const handleClick=(e)=>{
+function Details() {
+    const [name, setName] = useState('')
+    const [tabId, setTabId] = useState("info")
+    const handleClick = (e) => {
         setTabId(e.target.id)
-        let buttons=document.querySelectorAll('.tabs button')
-        buttons.forEach(item=>item.classList.remove('active'))
+        let buttons = document.querySelectorAll('.tabs button')
+        buttons.forEach(item => item.classList.remove('active'))
         e.target.classList.add('active')
     }
-    return(
+
+    const getName = () => {
+        let link = window.location.href.split('/')
+        let id = link[link.length - 1]
+        axios.get(process.env.REACT_APP_PROJECTINFO_API + id).then(data => setName(data.data[0].projectName))
+    }
+
+    useEffect(() => {
+        getName()
+    }, [])
+    return (
         <>
-            <Header/>
+            <Header />
             <div className="details">
-                <h1>Project Name</h1>
+                <h1>{name}</h1>
                 <div className="tabs">
                     <button id="info" onClick={handleClick} className='active'>General Info</button>
                     <button id="serverlink" onClick={handleClick}>Server Links</button>
@@ -29,11 +41,11 @@ function Details(){
                     <button id="tchstack" onClick={handleClick}>Tech Stack</button>
                 </div>
                 <div className="content">
-                    {tabId==="info" && <GeneralInfo/>}
-                    {tabId==="serverlink" && <ServerLink/>}
-                    {tabId==="gitlink" && <GitRepoLink/>}
-                    {tabId==="prusers" && <ProjectUser/>}
-                    {tabId==="tchstack" && <TechStack/>}
+                    {tabId === "info" && <GeneralInfo />}
+                    {tabId === "serverlink" && <ServerLink />}
+                    {tabId === "gitlink" && <GitRepoLink />}
+                    {tabId === "prusers" && <ProjectUser />}
+                    {tabId === "tchstack" && <TechStack />}
                 </div>
             </div>
         </>

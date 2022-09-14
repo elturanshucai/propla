@@ -9,7 +9,7 @@ function GeneralInfo() {
     useEffect(() => {
         let link = window.location.href.split('/')
         let id = link[link.length - 1]
-        axios.get(`http://10.1.14.29:81/api/GeneralInfo/${id}`).then(data => setGeneralInfo(data.data))
+        axios.get(process.env.REACT_APP_GENERALINFO_API + id).then(data => setGeneralInfo(data.data))
 
     }, [])
 
@@ -26,7 +26,7 @@ function GeneralInfo() {
                     </tr>
                 </thead>
                 <tbody>
-                    {generalInfo.map((item,index) => (
+                    {generalInfo.map((item, index) => (
                         <tr key={index}>
                             <td>{item?.projectFullname}</td>
                             <td>{item?.projectDescription}</td>

@@ -4,10 +4,10 @@ import logo from '../../images/logo_transparent.png'
 import "./Login.css"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from "react-redux/es/exports";
-import { fnLogin } from "../../Store/reducers/projectReducer";
 import * as Yup from 'yup'
 import Loading from "../UI/Loading";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const validationSchema = Yup.object({
     username: Yup.string()
@@ -19,7 +19,6 @@ const validationSchema = Yup.object({
 function Login() {
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
     const [alert, setAlert] = useState(false)
     const [loading, setLoading] = useState(false)
     const formik = useFormik({
@@ -32,15 +31,16 @@ function Login() {
 
             try {
                 setLoading(true)
-                const res = await axios.post('http://localhost:5000/login', values);
+                const res = await axios.post(process.env.REACT_APP_LOGIN_API, values);
                 if (res.data) {
+                    toast.success('Daxil oldunuz');
                     setLoading(false)
                     navigate('/')
                     localStorage.setItem('token', res.data)
-                    dispatch(fnLogin())
                 }
                 else {
                     setLoading(false)
+                    toast.error('Xəta baş verdi');
                     formik.errors.verify = 'Ad ve ya parol sehvdir'
                     setAlert(true)
                     setTimeout(() => setAlert(false), 2500)
@@ -65,14 +65,14 @@ function Login() {
         <div className="login">
             {loading && <Loading />}
             <div className="login-left">
-                <img src={logo} />
+                <img src={logo} alt='' />
                 <p>ProPla</p>
             </div>
             <div className="login-right">
                 <div className="box">
                     <div className="box-inner">
                         <div className="logo">
-                            <img src={logo} />
+                            <img src={logo} alt='' />
                             <p>ProPla</p>
                         </div>
                         <form onSubmit={formik.handleSubmit}>
